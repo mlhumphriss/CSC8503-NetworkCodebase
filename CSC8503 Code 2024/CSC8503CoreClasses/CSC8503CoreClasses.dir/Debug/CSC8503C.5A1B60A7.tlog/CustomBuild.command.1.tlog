@@ -1,0 +1,10 @@
+^C:\USERS\C1009080\SOURCE\CSC8503\CSC8503-NETWORKCODEBASE\CSC8503 CODE 2024\CSC8503CORECLASSES\CMAKELISTS.TXT
+setlocal
+H:\Desktop\cmake-3.31.0-windows-x86_64\cmake-3.31.0-windows-x86_64\bin\cmake.exe "-SC:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024" "-BC:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024" --check-stamp-file "C:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503CoreClasses/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

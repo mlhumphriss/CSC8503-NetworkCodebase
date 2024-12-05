@@ -1,0 +1,9 @@
+﻿  Main.cpp
+C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\Main.cpp(186,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\Main.cpp(270,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  NetworkPlayer.cpp
+  NetworkedGame.cpp
+  StateGameObject.cpp
+  TutorialGame.cpp
+  Generating Code...
+  CSC8503.vcxproj -> C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\x64\Debug\CSC8503.exe

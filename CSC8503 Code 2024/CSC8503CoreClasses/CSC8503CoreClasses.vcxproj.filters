@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\CMakeFiles\CSC8503CoreClasses.dir\cmake_pch.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\Debug.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\GameWorld.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\RenderObject.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\Transform.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\Debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\GameWorld.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\RenderObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourAction.h">
+      <Filter>AI\Behaviour Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourNode.h">
+      <Filter>AI\Behaviour Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourNodeWithChildren.h">
+      <Filter>AI\Behaviour Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourSelector.h">
+      <Filter>AI\Behaviour Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourSelector.cpp">
+      <Filter>AI\Behaviour Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourSequence.h">
+      <Filter>AI\Behaviour Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourSequence.cpp">
+      <Filter>AI\Behaviour Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\PushdownMachine.h">
+      <Filter>AI\Pushdown Automata</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\PushdownMachine.cpp">
+      <Filter>AI\Pushdown Automata</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\PushdownState.h">
+      <Filter>AI\Pushdown Automata</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\PushdownState.cpp">
+      <Filter>AI\Pushdown Automata</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\State.h">
+      <Filter>AI\State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\StateMachine.h">
+      <Filter>AI\State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\StateMachine.cpp">
+      <Filter>AI\State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\StateTransition.h">
+      <Filter>AI\State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NavigationGrid.h">
+      <Filter>AI\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NavigationGrid.cpp">
+      <Filter>AI\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NavigationMesh.cpp">
+      <Filter>AI\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NavigationMesh.h">
+      <Filter>AI\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NavigationMap.h">
+      <Filter>AI\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NavigationPath.h">
+      <Filter>AI\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\AABBVolume.h">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\CapsuleVolume.h">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\CapsuleVolume.cpp">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\CollisionDetection.h">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\CollisionDetection.cpp">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\CollisionVolume.h">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\OBBVolume.h">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\QuadTree.h">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\QuadTree.cpp">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\Ray.h">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\SphereVolume.h">
+      <Filter>Collision Detection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\GameClient.h">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\GameClient.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\GameServer.h">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\GameServer.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NetworkBase.h">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NetworkBase.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NetworkObject.h">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NetworkObject.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NetworkState.h">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\NetworkState.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\Constraint.h">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\PositionConstraint.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\PositionConstraint.h">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\OrientationConstraint.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\OrientationConstraint.h">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\PhysicsObject.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\PhysicsObject.h">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\PhysicsSystem.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\PhysicsSystem.h">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\callbacks.c">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\list.h">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\list.c">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\protocol.h">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\protocol.c">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\win32.h">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\win32.c">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\enet.h">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\time.h">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\types.h">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\utility.h">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\compress.c">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\host.c">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\packet.c">
+      <Filter>eNet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\enet\peer.c">
+      <Filter>eNet</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\CMakeFiles\CSC8503CoreClasses.dir\Debug\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\CMakeFiles\CSC8503CoreClasses.dir\Release\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503CoreClasses\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="AI">
+      <UniqueIdentifier>{7B9349D9-2802-3575-9EA2-EF191977E76D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Behaviour Trees">
+      <UniqueIdentifier>{2CCB0379-0B53-3E3B-B689-E53DCBFF8FDA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Pathfinding">
+      <UniqueIdentifier>{E32F8390-7F27-3802-B808-B0A14F2BCFBA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Pushdown Automata">
+      <UniqueIdentifier>{A9166B01-76D4-3497-BEA0-CF70573C5BAB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\State Machine">
+      <UniqueIdentifier>{8CF3B60B-67BF-3D09-973E-B7B8966F3887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision Detection">
+      <UniqueIdentifier>{5998F8F2-F511-35A1-B5E5-D2A6DF8E0B24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{07202943-0231-3982-8461-0F0220F4FD4F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Networking">
+      <UniqueIdentifier>{30B5FA66-9E72-397D-947D-5401262371D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{5D14DB0A-8A2A-372E-95F0-628C0B6AA103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompile Header File">
+      <UniqueIdentifier>{BD338B63-0B90-3515-B757-2E8E20DCAE3D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{20BD8C29-825E-3531-86FA-ABC22FE975CA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="eNet">
+      <UniqueIdentifier>{41487F85-31CB-3B4B-96E3-5D6E43CA44E4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
