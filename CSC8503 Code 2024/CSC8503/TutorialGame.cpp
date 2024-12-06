@@ -38,7 +38,10 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 	controller.MapAxis(3, "XLook");
 	controller.MapAxis(4, "YLook");
 
+
 	InitialiseAssets();
+
+	//world->GetPlayer().SetController(controller); //Matrix error : not caused by issue with matrixes in playerobject
 }
 
 /*
@@ -60,6 +63,8 @@ void TutorialGame::InitialiseAssets() {
 
 	basicTex	= renderer->LoadTexture("checkerboard.png");
 	basicShader = renderer->LoadShader("scene.vert", "scene.frag");
+
+
 
 	InitCamera();
 	InitWorld();
@@ -258,7 +263,7 @@ void TutorialGame::DebugObjectMovement() {
 
 void TutorialGame::InitCamera() {
 	world->GetMainCamera().SetNearPlane(0.1f);
-	world->GetMainCamera().SetFarPlane(500.0f);
+	world->GetMainCamera().SetFarPlane(700.0f);
 	world->GetMainCamera().SetPitch(-15.0f);
 	world->GetMainCamera().SetYaw(315.0f);
 	world->GetMainCamera().SetPosition(Vector3(-60, 40, 60));
@@ -355,8 +360,8 @@ GameObject* TutorialGame::AddCubeToWorld(const Vector3& position, Vector3 dimens
 GameObject* TutorialGame::AddPlayerToWorld(const Vector3& position) {
 	float meshSize		= 1.0f;
 	float inverseMass	= 0.5f;
-
-	GameObject* character = new GameObject();
+	
+	PlayerObject* character = new PlayerObject();
 	SphereVolume* volume  = new SphereVolume(1.0f);
 
 	character->SetBoundingVolume((CollisionVolume*)volume);
@@ -372,7 +377,7 @@ GameObject* TutorialGame::AddPlayerToWorld(const Vector3& position) {
 	character->GetPhysicsObject()->InitSphereInertia();
 
 	world->AddGameObject(character);
-
+	world->AddPlayerObject(character);
 	return character;
 }
 

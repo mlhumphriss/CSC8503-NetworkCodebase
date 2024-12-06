@@ -153,12 +153,12 @@ void TestNetworking() {
 
 vector<Vector3> testNodes;
 void TestPathfinding() {
-	NavigationGrid grid("testGrid1.txt");
+	NavigationGrid grid("TestGrid2.txt");
 
 	NavigationPath outPath;
 
-	Vector3 startPos(80, 0, 10);
-	Vector3 endPos(80, 0, 80);
+	Vector3 startPos(130, 0, 10);
+	Vector3 endPos(130, 0, 140);
 
 	bool found = grid.FindPath(startPos, endPos, outPath);
 
@@ -332,7 +332,7 @@ hide or show the
 
 */
 int main() {
-	TestNetworking();
+	//TestNetworking();
 	//TestBehaviourTree();
 	WindowInitialisation initInfo;
 	initInfo.width		= 1280;

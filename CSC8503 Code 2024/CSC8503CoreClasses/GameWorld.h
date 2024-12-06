@@ -4,6 +4,7 @@
 #include "Ray.h"
 #include "CollisionDetection.h"
 #include "QuadTree.h"
+#include "GameObject.h"
 namespace NCL {
 		class Camera;
 		using Maths::Ray;
@@ -23,6 +24,7 @@ namespace NCL {
 			void ClearAndErase();
 
 			void AddGameObject(GameObject* o);
+			void AddPlayerObject(PlayerObject* p);
 			void RemoveGameObject(GameObject* o, bool andDelete = false);
 
 			void AddConstraint(Constraint* c);
@@ -30,6 +32,9 @@ namespace NCL {
 
 			PerspectiveCamera& GetMainCamera()  {
 				return mainCamera;
+			}
+			PlayerObject GetPlayer() {
+				return *player;
 			}
 
 			void ShuffleConstraints(bool state) {
@@ -63,6 +68,7 @@ namespace NCL {
 			std::vector<Constraint*> constraints;
 
 			PerspectiveCamera mainCamera;
+			PlayerObject* player;
 
 			bool shuffleConstraints;
 			bool shuffleObjects;

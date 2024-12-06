@@ -40,6 +40,9 @@ void GameWorld::AddGameObject(GameObject* o) {
 	o->SetWorldID(worldIDCounter++);
 	worldStateCounter++;
 }
+void GameWorld::AddPlayerObject(PlayerObject* p) {
+	player = p;
+}
 
 void GameWorld::RemoveGameObject(GameObject* o, bool andDelete) {
 	gameObjects.erase(std::remove(gameObjects.begin(), gameObjects.end(), o), gameObjects.end());

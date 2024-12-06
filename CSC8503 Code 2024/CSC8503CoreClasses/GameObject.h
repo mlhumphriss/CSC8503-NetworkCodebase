@@ -1,6 +1,8 @@
 #pragma once
 #include "Transform.h"
 #include "CollisionVolume.h"
+#include "Controller.h"
+#include "Camera.h"
 
 using std::vector;
 
@@ -87,6 +89,26 @@ namespace NCL::CSC8503 {
 		std::string	name;
 
 		Vector3 broadphaseAABB;
+	};
+
+	class PlayerObject : public GameObject {
+	public:
+		PlayerObject() : GameObject() {// When called need to pass in active controller somehow
+			pYaw = 0.0f;
+		}
+		~PlayerObject();
+		void UpdateMovement();
+
+		void SetController(const Controller& c) {
+			playerController = &c;
+		}
+		
+
+	protected:
+		Camera* playerCam;
+		float pYaw;
+		
+		const Controller* playerController = nullptr;
 	};
 }
 
