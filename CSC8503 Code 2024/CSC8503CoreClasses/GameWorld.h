@@ -33,8 +33,8 @@ namespace NCL {
 			PerspectiveCamera& GetMainCamera()  {
 				return mainCamera;
 			}
-			PlayerObject GetPlayer() {
-				return *player;
+			PlayerObject* GetPlayer() {
+				return player;
 			}
 
 			void ShuffleConstraints(bool state) {

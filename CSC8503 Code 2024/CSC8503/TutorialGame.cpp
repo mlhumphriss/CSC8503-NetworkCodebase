@@ -41,7 +41,7 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 
 	InitialiseAssets();
 
-	//world->GetPlayer().SetController(controller); //Matrix error : not caused by issue with matrixes in playerobject
+	world->GetPlayer()->SetController(controller); 
 }
 
 /*
@@ -89,6 +89,7 @@ TutorialGame::~TutorialGame()	{
 void TutorialGame::UpdateGame(float dt) {
 	if (!inSelectionMode) {
 		world->GetMainCamera().UpdateCamera(dt);
+		world->GetPlayer()->UpdateMovement();
 	}
 	if (lockedObject != nullptr) {
 		Vector3 objPos = lockedObject->GetTransform().GetPosition();
