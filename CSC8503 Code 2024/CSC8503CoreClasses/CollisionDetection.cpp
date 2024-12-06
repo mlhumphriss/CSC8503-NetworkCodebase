@@ -320,6 +320,18 @@ bool CollisionDetection::AABBSphereIntersection(const AABBVolume& volumeA, const
 
 bool  CollisionDetection::OBBSphereIntersection(const OBBVolume& volumeA, const Transform& worldTransformA,
 	const SphereVolume& volumeB, const Transform& worldTransformB, CollisionInfo& collisionInfo) {
+
+	/*
+	* Apply inverse rotation to Box to make axis line up, then rotate sphere relative to box origin to work out intersection with AABB/Sphere system
+	* After finding localpoint, rotate back to original position using reverese of rotation on sphere
+	* 
+	Quaternion q = worldTransformA->GetOrientation();
+	Quaternion iq = q.Conjugate();
+
+	Matrix3 invOrientation = Quaternion::RotationMatrix<Matrix3>(q.Conjugate());
+	Matrix3 orientation = Quaternion::RotationMatrix<Matrix3>(q);
+	*/
+
 	return false;
 }
 
