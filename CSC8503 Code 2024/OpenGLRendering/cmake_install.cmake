@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024/OpenGLRendering
+# Install script for directory: C:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024/OpenGLRendering
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,6 +35,6 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024/OpenGLRendering/install_local_manifest.txt"
+  file(WRITE "C:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024/OpenGLRendering/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

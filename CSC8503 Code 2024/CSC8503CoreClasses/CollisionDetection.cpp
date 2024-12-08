@@ -136,6 +136,9 @@ bool CollisionDetection::RaySphereIntersection(const Ray&r, const Transform& wor
 }
 
 bool CollisionDetection::RayCapsuleIntersection(const Ray& r, const Transform& worldTransform, const CapsuleVolume& volume, RayCollision& collision) {
+
+
+
 	return false;
 }
 
@@ -320,6 +323,34 @@ bool CollisionDetection::AABBSphereIntersection(const AABBVolume& volumeA, const
 
 bool  CollisionDetection::OBBSphereIntersection(const OBBVolume& volumeA, const Transform& worldTransformA,
 	const SphereVolume& volumeB, const Transform& worldTransformB, CollisionInfo& collisionInfo) {
+
+	Vector3 boxSize = volumeA.GetHalfDimensions();
+	Vector3 delta = worldTransformB.GetPosition() - worldTransformA.GetPosition();
+
+	Quaternion q = worldTransformA.GetOrientation();
+	Quaternion iq = q.Conjugate();
+
+	Transform localTransA = worldTransformA;
+	localTransA.SetOrientation(worldTransformA.GetOrientation() * iq);
+	Transform localTransB = worldTransformB;
+	localTransB.SetPosition(delta); //think this is wrong
+	localTransB.SetOrientation(worldTransformB.GetOrientation() * iq);
+
+	Vector3 closestPointOnBox = Vector::Clamp(delta, -boxSize, boxSize);
+	Vector3 localPoint = delta - closestPointOnBox;
+	float distance = Vector::Length(localPoint);
+
+	if (distance < volumeB.GetRadius()) {
+		Vector3 collisionNormal = Vector::Normalise(localPoint);
+		float penentration = (volumeB.GetRadius() - distance);
+
+		/** need to translate this back to world given transform
+		Vector3 localA = Vector3();
+		Vector3 localB = -collisionNormal * volumeB.GetRadius();
+
+		collisionInfo.AddContactPoint(localA, localB, collisionNormal, penentration);
+		return true;*/
+	}
 
 	/*
 	* Apply inverse rotation to Box to make axis line up, then rotate sphere relative to box origin by first - box position in world to work out intersection with AABB/Sphere system

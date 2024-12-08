@@ -14,9 +14,9 @@
 #include <iostream>
 #include <chrono>
 #include <sstream>
-#include "C:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Vector.h"
-#include "C:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Quaternion.h"
-#include "C:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Plane.h"
-#include "C:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Matrix.h"
-#include "C:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/GameTimer.h"
+#include "C:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Vector.h"
+#include "C:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Quaternion.h"
+#include "C:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Plane.h"
+#include "C:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Matrix.h"
+#include "C:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/GameTimer.h"
 #endif // __cplusplus

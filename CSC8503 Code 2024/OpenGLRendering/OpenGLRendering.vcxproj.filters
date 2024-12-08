@@ -1,69 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\cmake_pch.cxx">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\cmake_pch.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLTexture.h">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLTexture.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLShader.h">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLShader.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLRenderer.h">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLRenderer.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLMesh.h">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLMesh.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLComputeShader.h">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLComputeShader.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLTexture.cpp">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLShader.cpp">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLRenderer.cpp">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLMesh.cpp">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLComputeShader.cpp">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\OGLComputeShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\glad\gl.h">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\glad\gl.h">
       <Filter>GLAD</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\glad\gl.c">
+    <ClCompile Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\glad\gl.c">
       <Filter>GLAD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\Debug\cmake_pch.hxx">
+    <ClInclude Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\Debug\cmake_pch.hxx">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\Release\cmake_pch.hxx">
+    <ClInclude Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\Release\cmake_pch.hxx">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\OpenGLRendering\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GLAD">
-      <UniqueIdentifier>{D688B52E-705D-32BF-8259-08115AFD49BA}</UniqueIdentifier>
+      <UniqueIdentifier>{ABDC7A7B-5882-3BF7-A10F-8C788C62E180}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{07202943-0231-3982-8461-0F0220F4FD4F}</UniqueIdentifier>
+      <UniqueIdentifier>{1D68A8BD-15B1-3AC4-BC17-9EF546DB85F4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Precompile Header File">
-      <UniqueIdentifier>{BD338B63-0B90-3515-B757-2E8E20DCAE3D}</UniqueIdentifier>
+      <UniqueIdentifier>{1C3185D7-2B79-332E-A6A7-25BC49A48C00}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{20BD8C29-825E-3531-86FA-ABC22FE975CA}</UniqueIdentifier>
+      <UniqueIdentifier>{FB435D02-F2A0-308D-B9E1-609E72BA0936}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
