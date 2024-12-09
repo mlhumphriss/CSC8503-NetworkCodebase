@@ -321,15 +321,42 @@ bool CollisionDetection::AABBSphereIntersection(const AABBVolume& volumeA, const
 bool  CollisionDetection::OBBSphereIntersection(const OBBVolume& volumeA, const Transform& worldTransformA,
 	const SphereVolume& volumeB, const Transform& worldTransformB, CollisionInfo& collisionInfo) {
 
+	Vector3 boxSize = volumeA.GetHalfDimensions();
+	Vector3 delta = worldTransformB.GetPosition() - worldTransformA.GetPosition();
+
+	Quaternion qa = worldTransformA.GetOrientation();
+	Quaternion iq = qa.Conjugate();
+
+	Matrix3 rotation = Quaternion::RotationMatrix<Matrix3>(qa);
+	Matrix3 invRotation = Quaternion::RotationMatrix<Matrix3>(iq);
+
+
+
+	Vector3 invDelta = invRotation * delta;
+
+
+	Vector3 closestPointOnBox = Vector::Clamp(invDelta, -boxSize, boxSize);
+	Vector3 localPoint = invDelta - closestPointOnBox;
+	float distance = Vector::Length(localPoint);
+
+	if (distance < volumeB.GetRadius()) {
+
+		//Make a black whole between spheres and cubes so maybe normal error?
+
+		Vector3 localCollisionNormal = Vector::Normalise(localPoint);
+		float penentration = (volumeB.GetRadius() - distance);
+
+		Vector3 collisionNormal = rotation * localCollisionNormal;
+
+		Vector3 localA = Vector3();
+		Vector3 localB = -collisionNormal * volumeB.GetRadius();
+
+		collisionInfo.AddContactPoint(localA, localB, collisionNormal, penentration);
+		return true;
+	}
 	/*
 	* Apply inverse rotation to Box to make axis line up, then rotate sphere relative to box origin by first - box position in world to work out intersection with AABB/Sphere system
 	* After finding localpoint, rotate back to original position using reverese of rotation on sphere and transformation of cube
-	* 
-	Quaternion q = worldTransformA->GetOrientation();
-	Quaternion iq = q.Conjugate();
-
-	Matrix3 invOrientation = Quaternion::RotationMatrix<Matrix3>(q.Conjugate());
-	Matrix3 orientation = Quaternion::RotationMatrix<Matrix3>(q);
 	*/
 
 	return false;
@@ -347,8 +374,106 @@ bool CollisionDetection::SphereCapsuleIntersection(
 	return false;
 }
 
+void CreateOBBCube(const Transform& worldTransform, const OBBVolume& volume, Vector3 vertices[8]) {
+	Vector3 pos = worldTransform.GetPosition();
+	Vector3 dims = volume.GetHalfDimensions();
+
+	Quaternion orientation = worldTransform.GetOrientation();
+	Matrix3 transform = Quaternion::RotationMatrix<Matrix3>(orientation);
+	
+	vertices[0] = transform * (pos + dims);
+	vertices[1] = transform * (pos + Vector3(dims.x,dims.y,-dims.z));
+	vertices[2] = transform * (pos + Vector3(dims.x, -dims.y, dims.z));
+	vertices[3] = transform * (pos + Vector3(-dims.x, dims.y, dims.z));
+	vertices[4] = transform * (pos + Vector3(dims.x, -dims.y, -dims.z));
+	vertices[5] = transform * (pos + Vector3(-dims.x, dims.y, -dims.z));
+	vertices[6] = transform * (pos + Vector3(-dims.x, -dims.y, dims.z));
+	vertices[7] = transform * (pos - dims);
+
+}
+
+
 bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transform& worldTransformA,
 	const OBBVolume& volumeB, const Transform& worldTransformB, CollisionInfo& collisionInfo) {
+
+	Vector3 boxSize = volumeA.GetHalfDimensions();
+	Quaternion qa = worldTransformA.GetOrientation();
+	Quaternion iq = qa.Conjugate();
+	Matrix3 rotation = Quaternion::RotationMatrix<Matrix3>(qa);
+	Matrix3 invRotation = Quaternion::RotationMatrix<Matrix3>(iq);
+
+
+
+	Vector3 aVertices[8];
+	CreateOBBCube(worldTransformA, volumeA, aVertices);
+	Vector3 bVertices[8];
+	CreateOBBCube(worldTransformB, volumeB, bVertices);
+
+	Vector3 minA;
+	Vector3 maxA;
+	Vector3 minB;
+	Vector3 maxB;
+
+	minA = aVertices[0];
+	maxA = aVertices[0];
+	minB = bVertices[0];
+	maxB = bVertices[0];
+
+	for (int i = 1; i < 8; ++i) {
+		if (aVertices[i].x < minA.x) { minA.x = aVertices[i].x; }
+		if (aVertices[i].y < minA.y) { minA.y = aVertices[i].y; }
+		if (aVertices[i].z < minA.z) { minA.z = aVertices[i].z; }
+		if (aVertices[i].x > maxA.x) { maxA.x = aVertices[i].x; }
+		if (aVertices[i].y > maxA.y) { maxA.y = aVertices[i].y; }
+		if (aVertices[i].z > maxA.z) { maxA.z = aVertices[i].z; }
+		if (bVertices[i].x < minB.x) { minB.x = bVertices[i].x; }
+		if (bVertices[i].y < minB.y) { minB.y = bVertices[i].y; }
+		if (bVertices[i].z < minB.z) { minB.z = bVertices[i].z; }
+		if (bVertices[i].x > maxB.x) { maxB.x = bVertices[i].x; }
+		if (bVertices[i].y > maxB.y) { maxB.y = bVertices[i].y; }
+		if (bVertices[i].z > maxB.z) { maxB.z = bVertices[i].z; }
+	}
+	bool overlap[3] = { false, false, false };
+	if (minA.x < maxB.x || minB.x < maxA.x) { overlap[0] = true; }
+	if (minA.y < maxB.y || minB.y < maxA.y) { overlap[1] = true; }
+	if (minA.z < maxB.z || minB.z < maxA.z) { overlap[2] = true; }
+	bool collision = false;
+	if (overlap[0] == true && overlap[1] == true && overlap[2] == true) { 
+		collision = true; 
+		
+		Vector3 delta = worldTransformB.GetPosition() - worldTransformA.GetPosition();
+		Vector3 closestPointOnBoxA = Vector::Clamp(delta, -boxSize, boxSize);
+		Vector3 localPointA = delta - closestPointOnBoxA;
+
+		Vector3 invDelta = worldTransformA.GetPosition() - worldTransformB.GetPosition();
+		Vector3 closestPointOnBoxB = Vector::Clamp(invDelta, -boxSize, boxSize);
+		Vector3 localPointB = invDelta - closestPointOnBoxB;
+
+		float distanceA = Vector::Length(localPointA);
+		float distanceB = Vector::Length(localPointB);
+		float distance = Vector::Length(delta);
+		float totDistance = distanceA + distanceB;
+
+		if (totDistance > distance) {
+			Vector3 collisionNormal = Vector::Normalise(localPointA);
+			float penentration = (totDistance - distance);
+
+			Vector3 localA = Vector3();
+			Vector3 localB = -collisionNormal * distanceB;
+			/**
+			std::cout << minA.x << "," << minA.y << "," << minA.z << std::endl;
+			std::cout << maxB.x << "," << maxB.y << "," << maxB.z << std::endl;
+			std::cout << minB.x << "," << minB.y << "," << minB.z << std::endl;
+			std::cout << maxA.x << "," << maxA.y << "," << maxA.z << std::endl;
+			//*/
+			//collisionInfo.AddContactPoint(localA, localB, collisionNormal, penentration);
+
+			//return true;
+		}
+	
+	
+	}
+
 	return false;
 }
 
