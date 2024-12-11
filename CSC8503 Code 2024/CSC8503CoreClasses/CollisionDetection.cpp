@@ -598,68 +598,8 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 			collisionAxis = axis;
 		}
 	}
-	Vector3 verticesA[8];
-	Vector3 verticesB[8];
 
-	// Compute vertices for volumeA
-	Vector3 corners[8] = {
-		Vector3(-1, -1, -1), Vector3(1, -1, -1),
-		Vector3(-1,  1, -1), Vector3(1,  1, -1),
-		Vector3(-1, -1,  1), Vector3(1, -1,  1),
-		Vector3(-1,  1,  1), Vector3(1,  1,  1)
-	};
-
-	for (int i = 0; i < 8; ++i) {
-		Vector3 localVertex = corners[i] * volumeA.GetHalfDimensions();
-		verticesA[i] = worldTransformA.GetPosition() + rotationA * localVertex;
-	}
-
-	for (int i = 0; i < 8; ++i) {
-		Vector3 localVertex = corners[i] * volumeB.GetHalfDimensions();
-		verticesB[i] = worldTransformB.GetPosition() + rotationB * localVertex;
-	}
-
-	float minProjA = FLT_MAX, maxProjA = -FLT_MAX;
-	float minProjB = FLT_MAX, maxProjB = -FLT_MAX;
-
-	Vector3 closestPointA, closestPointB;
-
-	for (int i = 0; i < 8; ++i) {
-		float projA = Vector::Dot(verticesA[i], collisionAxis);
-		if (projA < minProjA) {
-			minProjA = projA;
-			closestPointA = verticesA[i];
-		}
-		if (projA > maxProjA) {
-			maxProjA = projA;
-		}
-
-		float projB = Vector::Dot(verticesB[i], collisionAxis);
-		if (projB < minProjB) {
-			minProjB = projB;
-			closestPointB = verticesB[i];
-		}
-		if (projB > maxProjB) {
-			maxProjB = projB;
-		}
-	}
-
-	float penetrationDepth = (maxProjA - minProjB);
-
-	if (penetrationDepth > 0.0f) {
-		// Contact point is the mid-point between the closest points
-		Vector3 contactPoint = (closestPointA + closestPointB) * 0.5f;
-
-		// Add to collision info
-		collisionInfo.AddContactPoint(
-			closestPointA,    // Local space point on A
-			closestPointB,    // Local space point on B
-			Vector::Normalise(collisionAxis),    // Collision normal
-			penetrationDepth  // Penetration depth
-		);
-	}
 	
-	/*
 	Vector3 delta = worldTransformB.GetPosition() - worldTransformA.GetPosition();
 	Vector3 centredPointA = delta - worldTransformA.GetPosition();
 	Vector3 localPointA;
@@ -681,10 +621,21 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 	Vector3 localCollisionNormal = Vector::Normalise(localColPoint);
 	Vector3 collisionNormal = rotationA * localCollisionNormal;
 
+	Debug::DrawLine(worldTransformA.GetPosition(), collisionNormal);
+	Debug::DrawLine(worldTransformB.GetPosition(), collisionNormal, Vector4(1, 0, 0, 1));
+	Debug::DrawLine(delta, collisionNormal, Vector4(0,0,1,1));
+	Debug::DrawLine(worldTransformB.GetPosition(), Vector3(0, 0, 0), Vector4(1, 0, 1, 1));
 
-	collisionInfo.AddContactPoint(localA, localB, collisionNormal /*Vector::Normalise(collisionAxis)*, minPenetration);
-	return true;
+	/*
+	When floor is Object A, sits fine but when angular momentum it spins a lot
+	When cube is object A, collision normal is still up from floor origin so flings off
+
+	collision norml is from origin world space, not local
 	*/
+
+	std::cout << minPenetration << std::endl;
+	collisionInfo.AddContactPoint(localA, localB, collisionNormal, minPenetration);
+	return true;
 	
 }
 //*/

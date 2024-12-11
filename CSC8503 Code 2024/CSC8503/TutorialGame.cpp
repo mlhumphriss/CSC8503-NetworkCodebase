@@ -276,10 +276,10 @@ void TutorialGame::InitWorld() {
 	physics->Clear();
 
 	InitMixedGridWorld(15, 15, 3.5f, 3.5f);
-	BridgeConstraintTest();
+	//BridgeConstraintTest();
 	InitGameExamples();
 	InitDefaultFloor();
-	testStateObject = AddStateObjectToWorld(Vector3(0, 10, 0));
+	//testStateObject = AddStateObjectToWorld(Vector3(0, 10, 0));
 }
 
 /*
@@ -479,8 +479,8 @@ void TutorialGame::InitDefaultFloor() {
 
 void TutorialGame::InitGameExamples() {
 	AddPlayerToWorld(Vector3(0, 5, 0));
-	AddEnemyToWorld(Vector3(5, 5, 0));
-	AddBonusToWorld(Vector3(10, 5, 0));
+	//AddEnemyToWorld(Vector3(5, 5, 0));
+	//AddBonusToWorld(Vector3(10, 5, 0));
 }
 
 void TutorialGame::InitSphereGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing, float radius) {
@@ -497,6 +497,9 @@ void TutorialGame::InitMixedGridWorld(int numRows, int numCols, float rowSpacing
 	float sphereRadius = 1.0f;
 	Vector3 cubeDims = Vector3(1, 1, 1);
 
+	AddCubeToWorld(Vector3(20.0f, 10.0f, 30.0f), cubeDims);
+
+	/**
 	for (int x = 0; x < numCols; ++x) {
 		for (int z = 0; z < numRows; ++z) {
 			Vector3 position = Vector3(x * colSpacing, 10.0f, z * rowSpacing);
@@ -508,7 +511,7 @@ void TutorialGame::InitMixedGridWorld(int numRows, int numCols, float rowSpacing
 				AddSphereToWorld(position, sphereRadius);
 			}
 		}
-	}
+	}*/
 }
 
 void TutorialGame::InitCubeGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing, const Vector3& cubeDims) {
