@@ -569,23 +569,12 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 			}
 			else {
 				
-				//Vector3 fallBackAxis = axesA[i];
-				//testAxes[axisIndex++] = Vector::Normalise(fallBackAxis);
-				
 
 				Vector3 normalA = axesA[i];
 				Vector3 normalB = axesB[j];
 
 				
 				//float penDepth = CalculatePenetrationDepth(normalA, boxSizeA, worldTransformA, boxSizeB, worldTransformB, rotationA, rotationB);
-
-				//if (penDepth > 0) {
-					//Vector3 displacement = normalA * penDepth;
-					//ResolveFaceToFaceCollision(worldTransformA, worldTransformB, displacement);
-					//collisionInfo.AddContactPoint(Vector3(), Vector3(), normalA, penDepth);
-					//return true;
-
-				//}
 				testAxes[axisIndex++] = Vector::Normalise(normalA);
 			}
 		
@@ -601,7 +590,7 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 		float centerDistance = abs(Vector::Dot(axis, worldTransformB.GetPosition() - worldTransformA.GetPosition()));
 		float overlap = projectionA + projectionB - centerDistance;
 
-		if (overlap <= 0.0f) { return false; }
+		if (overlap <= -FLT_EPSILON) { return false; }
 
 		if (overlap < minPenetration) {
 			minPenetration = overlap;
@@ -632,7 +621,7 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 	Vector3 collisionNormal = rotationA * localCollisionNormal;
 
 
-	collisionInfo.AddContactPoint(localA, localB, collisionNormal/*Vector::Normalise(collisionAxis)*/, minPenetration);
+	collisionInfo.AddContactPoint(localA, localB, collisionNormal /*Vector::Normalise(collisionAxis)*/, minPenetration);
 	return true;
 
 	
