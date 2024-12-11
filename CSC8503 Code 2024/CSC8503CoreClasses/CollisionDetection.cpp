@@ -352,6 +352,8 @@ bool  CollisionDetection::OBBSphereIntersection(const OBBVolume& volumeA, const 
 
 		Vector3 localA = Vector3();
 		Vector3 localB = -collisionNormal * volumeB.GetRadius();
+		Debug::DrawLine(collisionNormal, localA, Vector4(1, 1, 0, 1));
+		Debug::DrawLine(collisionNormal, localB, Vector4(0, 1, 1, 1));
 
 		collisionInfo.AddContactPoint(localA, localB, collisionNormal, penentration);
 		return true;
@@ -386,124 +388,7 @@ void ResolveFaceToFaceCollision(Transform transformA, Transform transformB, cons
 	// Optionally, you might want to adjust the velocities or any other dynamic properties
 	// if you're doing a physics simulation (e.g., bouncing back after collision).
 }
-/**
-float CalculatePenetrationDepth(const Vector3& normal, const Vector3& boxSizeA, const Transform& transformA, const Vector3& boxSizeB, const Transform& transformB, const Matrix3& rotationA, const Matrix3& rotationB) {
-	// Ensure the distance is between the centers of A and B
-	float distance = abs(Vector::Dot(normal, transformA.GetPosition() - transformB.GetPosition()));
 
-	// Calculate projections
-	float projectionA = boxSizeA.x * abs(Vector::Dot(normal, rotationA.GetColumn(0))) +
-		boxSizeA.y * abs(Vector::Dot(normal, rotationA.GetColumn(1))) +
-		boxSizeA.z * abs(Vector::Dot(normal, rotationA.GetColumn(2)));
-
-	float projectionB = boxSizeB.x * abs(Vector::Dot(normal, rotationB.GetColumn(0))) +
-		boxSizeB.y * abs(Vector::Dot(normal, rotationB.GetColumn(1))) +
-		boxSizeB.z * abs(Vector::Dot(normal, rotationB.GetColumn(2)));
-
-	// Calculate the penetration depth
-	float penetration = projectionA + projectionB - distance;
-	return penetration > 0 ? penetration : 0;
-}
-
-bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transform& worldTransformA,
-	const OBBVolume& volumeB, const Transform& worldTransformB, CollisionInfo& collisionInfo) {
-	Vector3 boxSizeA = volumeA.GetHalfDimensions();
-	Vector3 boxSizeB = volumeB.GetHalfDimensions();
-	Quaternion qa = worldTransformA.GetOrientation();
-	Matrix3 rotationA = Quaternion::RotationMatrix<Matrix3>(qa);
-	Quaternion qb = worldTransformB.GetOrientation();
-	Matrix3 rotationB = Quaternion::RotationMatrix<Matrix3>(qb);
-
-	float minPenetration = FLT_MAX;
-	Vector3 collisionAxis;
-	bool collisionDetected = true;
-
-	// Project on axis helper function
-	auto ProjectOnAxis = [](const OBBVolume& volume, const Transform& transform, Matrix3 rotation, const Vector3& axis) -> float {
-		Vector3 xAxis = rotation.GetColumn(0);
-		Vector3 yAxis = rotation.GetColumn(1);
-		Vector3 zAxis = rotation.GetColumn(2);
-		return abs(Vector::Dot(axis, xAxis) * volume.GetHalfDimensions().x) +
-			abs(Vector::Dot(axis, yAxis) * volume.GetHalfDimensions().y) +
-			abs(Vector::Dot(axis, zAxis) * volume.GetHalfDimensions().z);
-		};
-
-	// Build list of axes to test
-	Vector3 testAxes[15];
-	int axisIndex = 0;
-
-	// Add box A axes
-	for (int i = 0; i < 3; ++i) {
-		testAxes[axisIndex++] = rotationA.GetColumn(i);
-	}
-
-	// Add box B axes
-	for (int i = 0; i < 3; ++i) {
-		testAxes[axisIndex++] = rotationB.GetColumn(i);
-	}
-
-	// Add cross products of axes A and B
-	for (int i = 0; i < 3; ++i) {
-		for (int j = 0; j < 3; ++j) {
-			Vector3 crossAxis = Vector::Cross(rotationA.GetColumn(i), rotationB.GetColumn(j));
-			if (Vector::LengthSquared(crossAxis) > FLT_EPSILON) {
-				testAxes[axisIndex++] = Vector::Normalise(crossAxis);
-			}
-		}
-	}
-
-	// Perform the Separating Axis Theorem (SAT) test
-	for (int i = 0; i < axisIndex; ++i) {
-		Vector3 axis = testAxes[i];
-
-		// Project each box onto the axis
-		float projectionA = ProjectOnAxis(volumeA, worldTransformA, rotationA, axis);
-		float projectionB = ProjectOnAxis(volumeB, worldTransformB, rotationB, axis);
-
-		// Calculate the center distance
-		float centerDistance = abs(Vector::Dot(axis, worldTransformB.GetPosition() - worldTransformA.GetPosition()));
-		float overlap = projectionA + projectionB - centerDistance;
-
-		if (overlap <= 0.0f) {
-			return false; // No overlap
-		}
-
-		if (overlap < minPenetration) {
-			minPenetration = overlap;
-			collisionAxis = axis;
-		}
-	}
-
-	// If we get here, there's a collision
-	Vector3 delta = worldTransformB.GetPosition() - worldTransformA.GetPosition();
-	Vector3 localPointA;
-	localPointA.x = Vector::Dot(delta, rotationA.GetColumn(0));
-	localPointA.y = Vector::Dot(delta, rotationA.GetColumn(1));
-	localPointA.z = Vector::Dot(delta, rotationA.GetColumn(2));
-
-	Vector3 localPointB;
-	localPointB.x = Vector::Dot(-delta, rotationB.GetColumn(0));
-	localPointB.y = Vector::Dot(-delta, rotationB.GetColumn(1));
-	localPointB.z = Vector::Dot(-delta, rotationB.GetColumn(2));
-
-	// Clamp points to the box extents
-	Vector3 localA = Vector::Clamp(localPointA, -boxSizeA, boxSizeA);
-	Vector3 localB = Vector::Clamp(localPointB, -boxSizeB, boxSizeB);
-
-	// Calculate collision normal
-	Vector3 localColPoint = delta - localA;
-	Vector3 localCollisionNormal = Vector::Normalise(localColPoint);
-	Vector3 collisionNormal = rotationA * localCollisionNormal;
-
-	collisionInfo.AddContactPoint(localA, localB, collisionNormal, minPenetration);
-	return true;
-}*/
-
-
-
-
-
-/**/
 float CalculatePenetrationDepth(const Vector3& normal, Vector3& boxSizeA, const Transform& transformA, Vector3& boxSizeB, const Transform& transformB, Matrix3 rotationA, Matrix3 rotationB ) {
 	Vector3 axesA[3] = { rotationA.GetColumn(0), rotationA.GetColumn(1), rotationA.GetColumn(2) };
 	Vector3 axesB[3] = { rotationB.GetColumn(0), rotationB.GetColumn(1), rotationB.GetColumn(2) };
@@ -621,16 +506,19 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 	Vector3 localCollisionNormal = Vector::Normalise(localColPoint);
 	Vector3 collisionNormal = rotationA * localCollisionNormal;
 
-	Debug::DrawLine(worldTransformA.GetPosition(), collisionNormal);
-	Debug::DrawLine(worldTransformB.GetPosition(), collisionNormal, Vector4(1, 0, 0, 1));
-	Debug::DrawLine(delta, collisionNormal, Vector4(0,0,1,1));
-	Debug::DrawLine(worldTransformB.GetPosition(), Vector3(0, 0, 0), Vector4(1, 0, 1, 1));
+	Debug::DrawLine(localA, collisionNormal);
+	Debug::DrawLine(localB, collisionNormal, Vector4(1, 0, 0, 1));
+	//Debug::DrawLine(delta, collisionNormal, Vector4(0,0,1,1));
+	//Debug::DrawLine(worldTransformB.GetPosition(), Vector3(0, 0, 0), Vector4(1, 0, 1, 1));
 
 	/*
 	When floor is Object A, sits fine but when angular momentum it spins a lot
 	When cube is object A, collision normal is still up from floor origin so flings off
 
 	collision norml is from origin world space, not local
+
+
+	localA when isn't flung is delta pos
 	*/
 
 	std::cout << minPenetration << std::endl;
