@@ -143,7 +143,7 @@ void TutorialGame::UpdateGame(float dt) {
 		testStateObject->Update(dt);
 	}
 
-	Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
+	//Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
 	
 
 	SelectObject();
@@ -289,6 +289,7 @@ A single function to add a large immoveable cube to the bottom of our world
 */
 GameObject* TutorialGame::AddFloorToWorld(const Vector3& position) {
 	GameObject* floor = new GameObject();
+	floor->SetAsFloor(true);
 
 	Vector3 floorSize = Vector3(200, 2, 200);
 	OBBVolume* volume = new OBBVolume(floorSize);

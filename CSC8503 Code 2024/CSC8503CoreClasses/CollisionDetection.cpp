@@ -167,7 +167,15 @@ bool CollisionDetection::ObjectIntersection(GameObject* a, GameObject* b, Collis
 	}
 	//Two OBBs
 	if (pairType == VolumeType::OBB) {
-		return OBBIntersection((OBBVolume&)*volA, transformA, (OBBVolume&)*volB, transformB, collisionInfo);
+		if (a->GetFloor() != true) {
+			std::cout << "swap" << "\n";
+			collisionInfo.a = b;
+			collisionInfo.b = a;
+			return OBBIntersection((OBBVolume&)*volB, transformB, (OBBVolume&)*volA, transformA, collisionInfo);
+		}
+		else {
+			return OBBIntersection((OBBVolume&)*volA, transformA, (OBBVolume&)*volB, transformB, collisionInfo);
+		}
 	}
 	//Two Capsules
 
@@ -352,9 +360,6 @@ bool  CollisionDetection::OBBSphereIntersection(const OBBVolume& volumeA, const 
 
 		Vector3 localA = Vector3();
 		Vector3 localB = -collisionNormal * volumeB.GetRadius();
-		Debug::DrawLine(collisionNormal, localA, Vector4(1, 1, 0, 1));
-		Debug::DrawLine(collisionNormal, localB, Vector4(0, 1, 1, 1));
-
 		collisionInfo.AddContactPoint(localA, localB, collisionNormal, penentration);
 		return true;
 	}
@@ -377,7 +382,7 @@ bool CollisionDetection::SphereCapsuleIntersection(
 	const SphereVolume& volumeB, const Transform& worldTransformB, CollisionInfo& collisionInfo) {
 	return false;
 }
-
+/**
 void ResolveFaceToFaceCollision(Transform transformA, Transform transformB, const Vector3& displacement) {
 	// Move object A in the opposite direction of the displacement (to resolve overlap)
 	transformA.SetPosition(transformA.GetPosition()- displacement);
@@ -402,7 +407,7 @@ float CalculatePenetrationDepth(const Vector3& normal, Vector3& boxSizeA, const 
 
 	return penetration > 0 ? penetration : 0;
 }
-
+*/
 bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transform& worldTransformA,
 	const OBBVolume& volumeB, const Transform& worldTransformB, CollisionInfo& collisionInfo) {
 
@@ -441,7 +446,6 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 		testAxes[axisIndex++] = axesB[i];
 	}
 
-
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
 			Vector3 crossAxis = Vector::Cross(axesA[i], axesB[j]);
@@ -452,18 +456,6 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 			if (check == true) {
 				testAxes[axisIndex++] = Vector::Normalise(crossAxis);
 			}
-			/*
-			else {
-				
-
-				Vector3 normalA = axesA[i];
-				Vector3 normalB = axesB[j];
-
-				
-				//float penDepth = CalculatePenetrationDepth(normalA, boxSizeA, worldTransformA, boxSizeB, worldTransformB, rotationA, rotationB);
-				testAxes[axisIndex++] = Vector::Normalise(normalA);
-			}*/
-		
 		}
 	}
 
@@ -483,8 +475,6 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 			collisionAxis = axis;
 		}
 	}
-
-	
 	Vector3 delta = worldTransformB.GetPosition() - worldTransformA.GetPosition();
 	Vector3 centredPointA = delta - worldTransformA.GetPosition();
 	Vector3 localPointA;
@@ -505,28 +495,10 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 	Vector3 localColPoint = delta - localA;
 	Vector3 localCollisionNormal = Vector::Normalise(localColPoint);
 	Vector3 collisionNormal = rotationA * localCollisionNormal;
-
-	Debug::DrawLine(localA, collisionNormal);
-	Debug::DrawLine(localB, collisionNormal, Vector4(1, 0, 0, 1));
-	//Debug::DrawLine(delta, collisionNormal, Vector4(0,0,1,1));
-	//Debug::DrawLine(worldTransformB.GetPosition(), Vector3(0, 0, 0), Vector4(1, 0, 1, 1));
-
-	/*
-	When floor is Object A, sits fine but when angular momentum it spins a lot
-	When cube is object A, collision normal is still up from floor origin so flings off
-
-	collision norml is from origin world space, not local
-
-
-	localA when isn't flung is delta pos
-	*/
-
-	std::cout << minPenetration << std::endl;
 	collisionInfo.AddContactPoint(localA, localB, collisionNormal, minPenetration);
 	return true;
 	
 }
-//*/
 
 Matrix4 GenerateInverseView(const Camera &c) {
 	float pitch = c.GetPitch();
