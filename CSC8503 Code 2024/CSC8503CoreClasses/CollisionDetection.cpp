@@ -168,7 +168,7 @@ bool CollisionDetection::ObjectIntersection(GameObject* a, GameObject* b, Collis
 	//Two OBBs
 	if (pairType == VolumeType::OBB) {
 		if (a->GetFloor() != true) {
-			std::cout << "swap" << "\n";
+			//std::cout << "swap" << "\n";
 			collisionInfo.a = b;
 			collisionInfo.b = a;
 			return OBBIntersection((OBBVolume&)*volB, transformB, (OBBVolume&)*volA, transformA, collisionInfo);
@@ -339,19 +339,13 @@ bool  CollisionDetection::OBBSphereIntersection(const OBBVolume& volumeA, const 
 
 	Matrix3 rotation = Quaternion::RotationMatrix<Matrix3>(qa);
 	Matrix3 invRotation = Quaternion::RotationMatrix<Matrix3>(iq);
-
-
-
 	Vector3 invDelta = invRotation * delta;
-
 
 	Vector3 closestPointOnBox = Vector::Clamp(invDelta, -boxSize, boxSize);
 	Vector3 localPoint = invDelta - closestPointOnBox;
 	float distance = Vector::Length(localPoint);
 
 	if (distance < volumeB.GetRadius()) {
-
-		//Make a black whole between spheres and cubes so maybe normal error?
 
 		Vector3 localCollisionNormal = Vector::Normalise(localPoint);
 		float penentration = (volumeB.GetRadius() - distance);
@@ -363,10 +357,6 @@ bool  CollisionDetection::OBBSphereIntersection(const OBBVolume& volumeA, const 
 		collisionInfo.AddContactPoint(localA, localB, collisionNormal, penentration);
 		return true;
 	}
-	/*
-	* Apply inverse rotation to Box to make axis line up, then rotate sphere relative to box origin by first - box position in world to work out intersection with AABB/Sphere system
-	* After finding localpoint, rotate back to original position using reverese of rotation on sphere and transformation of cube
-	*/
 
 	return false;
 }
@@ -382,32 +372,7 @@ bool CollisionDetection::SphereCapsuleIntersection(
 	const SphereVolume& volumeB, const Transform& worldTransformB, CollisionInfo& collisionInfo) {
 	return false;
 }
-/**
-void ResolveFaceToFaceCollision(Transform transformA, Transform transformB, const Vector3& displacement) {
-	// Move object A in the opposite direction of the displacement (to resolve overlap)
-	transformA.SetPosition(transformA.GetPosition()- displacement);
 
-	// Move object B in the direction of the displacement (to resolve overlap)
-	transformB.SetPosition(transformB.GetPosition() + displacement);
-
-	// Optionally, you might want to adjust the velocities or any other dynamic properties
-	// if you're doing a physics simulation (e.g., bouncing back after collision).
-}
-
-float CalculatePenetrationDepth(const Vector3& normal, Vector3& boxSizeA, const Transform& transformA, Vector3& boxSizeB, const Transform& transformB, Matrix3 rotationA, Matrix3 rotationB ) {
-	Vector3 axesA[3] = { rotationA.GetColumn(0), rotationA.GetColumn(1), rotationA.GetColumn(2) };
-	Vector3 axesB[3] = { rotationB.GetColumn(0), rotationB.GetColumn(1), rotationB.GetColumn(2) };
-
-	float projectionA = boxSizeA.x * abs(Vector::Dot(normal, axesA[0])) + boxSizeA.y * abs(Vector::Dot(normal, axesA[1])) + boxSizeA.z * abs(Vector::Dot(normal, axesA[2]));
-	float projectionB = boxSizeB.x * abs(Vector::Dot(normal, axesB[0])) + boxSizeB.y * abs(Vector::Dot(normal, axesB[1])) + boxSizeB.z * abs(Vector::Dot(normal, axesB[2]));
-
-	float distance = abs(Vector::Dot(normal, transformB.GetPosition() - transformA.GetPosition()));
-
-	float penetration = projectionA + projectionB - distance;
-
-	return penetration > 0 ? penetration : 0;
-}
-*/
 bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transform& worldTransformA,
 	const OBBVolume& volumeB, const Transform& worldTransformB, CollisionInfo& collisionInfo) {
 
@@ -495,6 +460,8 @@ bool CollisionDetection::OBBIntersection(const OBBVolume& volumeA, const Transfo
 	Vector3 localColPoint = delta - localA;
 	Vector3 localCollisionNormal = Vector::Normalise(localColPoint);
 	Vector3 collisionNormal = rotationA * localCollisionNormal;
+	if (Vector::Dot(collisionNormal, delta) < 0) { collisionNormal = -collisionNormal; }
+
 	collisionInfo.AddContactPoint(localA, localB, collisionNormal, minPenetration);
 	return true;
 	
