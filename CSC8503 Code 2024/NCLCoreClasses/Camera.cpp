@@ -32,9 +32,10 @@ void Camera::UpdateCamera(float dt) {
 
 	Matrix3 yawRotation = Matrix::RotationMatrix3x3(yaw, Vector3(0, 1, 0));
 
+	/*
 	position += yawRotation * Vector3(0, 0, -activeController->GetNamedAxis("Forward")) * frameSpeed;
 	position += yawRotation * Vector3(activeController->GetNamedAxis("Sidestep"), 0, 0) * frameSpeed;
-
+	*/
 	position.y += activeController->GetNamedAxis("UpDown") * frameSpeed;
 	
 }

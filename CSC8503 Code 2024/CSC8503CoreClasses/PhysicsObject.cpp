@@ -15,7 +15,6 @@ PhysicsObject::PhysicsObject(Transform* parentTransform, const CollisionVolume* 
 }
 
 PhysicsObject::~PhysicsObject()	{
-
 }
 
 void PhysicsObject::ApplyAngularImpulse(const Vector3& force) {

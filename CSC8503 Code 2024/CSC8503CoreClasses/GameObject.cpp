@@ -56,7 +56,7 @@ void GameObject::UpdateBroadphaseAABB() {
 PlayerObject::~PlayerObject() {
 }
 
-void PlayerObject::UpdateMovement() {
+void PlayerObject::UpdateMovement(float dt) {
 	if (!playerController) {
 		return;
 	}
@@ -69,9 +69,13 @@ void PlayerObject::UpdateMovement() {
 		pYaw -= 360.0f;
 	}
 	Quaternion yawRotation = Quaternion::Quaternion(Matrix::Rotation(pYaw, Vector3(0, 1, 0)));
-
+	
 	/**
 	Matrix3 yawRotation = Matrix::RotationMatrix3x3(pYaw, Vector3(0, 1, 0));
 	*/
-	this->GetTransform().SetOrientation(yawRotation); //doesn't rotate
+	this->GetTransform().SetOrientation(yawRotation);
+
+	Vector3 movement = yawRotation * Vector3(0, 0, playerController->GetNamedAxis("Forward")) * speed*dt;
+	movement += yawRotation * Vector3(-playerController->GetNamedAxis("Sidestep"), 0, 0) * speed*dt;
+	this->GetPhysicsObject()->ApplyLinearImpulse(movement);
 }

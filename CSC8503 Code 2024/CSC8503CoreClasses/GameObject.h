@@ -104,9 +104,10 @@ namespace NCL::CSC8503 {
 	public:
 		PlayerObject() : GameObject() {// When called need to pass in active controller somehow
 			pYaw = 0.0f;
+			speed = 100.0f;
 		}
 		~PlayerObject();
-		void UpdateMovement();
+		void UpdateMovement(float dt);
 
 		void SetController(const Controller& c) {
 			playerController = &c;
@@ -116,6 +117,7 @@ namespace NCL::CSC8503 {
 	protected:
 		Camera* playerCam;
 		float pYaw;
+		float speed;
 		
 		const Controller* playerController = nullptr;
 	};
