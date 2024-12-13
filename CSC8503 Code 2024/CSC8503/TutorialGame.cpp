@@ -88,7 +88,8 @@ TutorialGame::~TutorialGame()	{
 
 void TutorialGame::UpdateGame(float dt) {
 	if (!inSelectionMode) {
-		world->GetMainCamera().UpdateCamera(dt);
+		Vector3 playerPosition; //assign this to players position
+		world->GetMainCamera().UpdatePlayerCamera(dt, playerPosition);
 		world->GetPlayer()->UpdateMovement(dt);
 	}
 	if (lockedObject != nullptr) {

@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include "Window.h"
 
+
 using namespace NCL;
 
 /*
@@ -8,6 +9,43 @@ Polls the camera for keyboard / mouse movement.
 Should be done once per frame! Pass it the msec since
 last frame (default value is for simplicities sake...)
 */
+void Camera::UpdatePlayerCamera(float dt, Vector3 playerPosition) {
+	if (!activeController) {
+		return;
+	}
+
+	//Update the mouse by how much
+	pitch -= activeController->GetNamedAxis("YLook");
+	yaw -= activeController->GetNamedAxis("XLook");
+
+	//Bounds check the pitch, to be between straight up and straight down ;)
+	pitch = std::min(pitch, 90.0f);
+	pitch = std::max(pitch, -90.0f);
+
+	if (yaw < 0) {
+		yaw += 360.0f;
+	}
+	if (yaw > 360.0f) {
+		yaw -= 360.0f;
+	}
+
+	float frameSpeed = speed * dt;
+
+	Matrix3 yawRotation = Matrix::RotationMatrix3x3(yaw, Vector3(0, 1, 0));
+
+	/*
+	position += yawRotation * Vector3(0, 0, -activeController->GetNamedAxis("Forward")) * frameSpeed;
+	position += yawRotation * Vector3(activeController->GetNamedAxis("Sidestep"), 0, 0) * frameSpeed;
+	*/
+
+	Vector3 offset = yawRotation * Vector3(0.0f, 10.0f, -10.0f);
+	Vector3 camPos = playerPosition + offset;
+	position = camPos;
+
+	position.y += activeController->GetNamedAxis("UpDown") * frameSpeed;
+
+}
+
 void Camera::UpdateCamera(float dt) {
 	if (!activeController) {
 		return;
@@ -36,6 +74,7 @@ void Camera::UpdateCamera(float dt) {
 	position += yawRotation * Vector3(0, 0, -activeController->GetNamedAxis("Forward")) * frameSpeed;
 	position += yawRotation * Vector3(activeController->GetNamedAxis("Sidestep"), 0, 0) * frameSpeed;
 	*/
+
 	position.y += activeController->GetNamedAxis("UpDown") * frameSpeed;
 	
 }
