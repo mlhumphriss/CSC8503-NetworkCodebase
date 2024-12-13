@@ -38,7 +38,7 @@ void Camera::UpdatePlayerCamera(float dt, Vector3 playerPosition) {
 	position += yawRotation * Vector3(activeController->GetNamedAxis("Sidestep"), 0, 0) * frameSpeed;
 	*/
 
-	Vector3 offset = yawRotation * Vector3(0.0f, 10.0f, -10.0f);
+	Vector3 offset = yawRotation * Vector3(0.0f, 3.0f, 10.0f);
 	Vector3 camPos = playerPosition + offset;
 	position = camPos;
 

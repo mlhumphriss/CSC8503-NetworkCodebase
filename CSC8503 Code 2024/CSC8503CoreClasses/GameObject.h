@@ -80,6 +80,22 @@ namespace NCL::CSC8503 {
 			return isFloor;
 		}
 
+		void SetGrounded(bool g) {
+			grounded = g;
+		}
+
+		bool GetGrounded() const {
+			return grounded;
+		}
+
+		void SetDim(Vector3 d) {
+			dim = d;
+		}
+
+		Vector3 GetDim() const {
+			return dim;
+		}
+
 		int		GetWorldID() const {
 			return worldID;
 		}
@@ -92,6 +108,9 @@ namespace NCL::CSC8503 {
 		RenderObject*		renderObject;
 		NetworkObject*		networkObject;
 
+		Vector3		dim;
+
+		bool		grounded;
 		bool		isFloor;
 		bool		isActive;
 		int			worldID;
@@ -104,7 +123,7 @@ namespace NCL::CSC8503 {
 	public:
 		PlayerObject() : GameObject() {// When called need to pass in active controller somehow
 			pYaw = 0.0f;
-			speed = 100.0f;
+			speed = 25.0f;
 		}
 		~PlayerObject();
 		void UpdateMovement(float dt);
