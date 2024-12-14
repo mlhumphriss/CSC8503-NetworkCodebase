@@ -76,6 +76,14 @@ namespace NCL::CSC8503 {
 			return worldID;
 		}
 
+		void SetAsFloor(bool t) {
+			isFloor = t;
+		}
+
+		bool GetFloor() const {
+			return isFloor;
+		}
+
 	protected:
 		Transform			transform;
 
@@ -84,6 +92,7 @@ namespace NCL::CSC8503 {
 		RenderObject*		renderObject;
 		NetworkObject*		networkObject;
 
+		bool		isFloor;
 		bool		isActive;
 		int			worldID;
 		std::string	name;

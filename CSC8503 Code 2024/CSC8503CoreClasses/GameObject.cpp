@@ -70,8 +70,8 @@ void PlayerObject::UpdateMovement() {
 	}
 	Quaternion yawRotation = Quaternion::Quaternion(Matrix::Rotation(pYaw, Vector3(0, 1, 0)));
 
-	/**
+	/*//
 	Matrix3 yawRotation = Matrix::RotationMatrix3x3(pYaw, Vector3(0, 1, 0));
-	*/
-	this->GetTransform().SetOrientation(yawRotation); //doesn't rotate
+	//*/
+	this->GetTransform().SetOrientation(yawRotation);
 }

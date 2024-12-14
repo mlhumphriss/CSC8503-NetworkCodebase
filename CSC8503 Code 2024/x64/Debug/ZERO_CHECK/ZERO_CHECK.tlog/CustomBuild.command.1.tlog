@@ -1,6 +1,6 @@
-^C:\USERS\C1009080\SOURCE\CSC8503\CSC8503-NETWORKCODEBASE\CSC8503 CODE 2024\CMAKEFILES\9A91236A4218CB0DBDC2D7B922D02174\GENERATE.STAMP.RULE
+^C:\USERS\MLHUM\SOURCE\REPOS\CSC8503-NETWORKCODEBASE\CSC8503 CODE 2024\CMAKEFILES\5D75D52C2AD06034F9491FC09DD99F3E\GENERATE.STAMP.RULE
 setlocal
-H:\Desktop\cmake-3.31.0-windows-x86_64\cmake-3.31.0-windows-x86_64\bin\cmake.exe "-SC:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024" "-BC:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/c1009080/source/CSC8503/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503.sln"
+C:\Users\mlhum\Desktop\cmake-3.31.2-windows-x86_64\cmake-3.31.2-windows-x86_64\bin\cmake.exe "-SC:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024" "-BC:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024/CSC8503.sln"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

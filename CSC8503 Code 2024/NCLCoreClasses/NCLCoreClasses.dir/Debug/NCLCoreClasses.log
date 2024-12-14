@@ -1,2 +1,31 @@
-﻿  Camera.cpp
-  NCLCoreClasses.vcxproj -> C:\Users\c1009080\source\CSC8503\CSC8503-NetworkCodebase\CSC8503 Code 2024\NCLCoreClasses\Debug\NCLCoreClasses.lib
+﻿  Building Custom Rule C:/Users/mlhum/source/repos/CSC8503-NetworkCodebase/CSC8503 Code 2024/NCLCoreClasses/CMakeLists.txt
+  cmake_pch.cxx
+  Assets.cpp
+  SimpleFont.cpp
+  TextureLoader.cpp
+  TextureWriter.cpp
+  Maths.cpp
+  Plane.cpp
+  Frustum.cpp
+  Quaternion.cpp
+  MeshAnimation.cpp
+  Mesh.cpp
+  MshLoader.cpp
+  MeshMaterial.cpp
+  RendererBase.cpp
+  Shader.cpp
+  Texture.cpp
+  Camera.cpp
+  GameTimer.cpp
+  Keyboard.cpp
+  Mouse.cpp
+  Window.cpp
+  Generating Code...
+  Compiling...
+  Controller.cpp
+  KeyboardMouseController.cpp
+  Win32Keyboard.cpp
+  Win32Mouse.cpp
+  Win32Window.cpp
+  Generating Code...
+  NCLCoreClasses.vcxproj -> C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\NCLCoreClasses\Debug\NCLCoreClasses.lib
