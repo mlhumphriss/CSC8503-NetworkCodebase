@@ -11,6 +11,7 @@ https://research.ncl.ac.uk/game/
 #include "Matrix.h"
 #include "Controller.h"
 
+
 namespace NCL {
 	using namespace NCL::Maths;
 	class Camera {
@@ -33,6 +34,8 @@ namespace NCL {
 		~Camera(void) = default;
 
 		virtual void UpdateCamera(float dt);
+
+		virtual void UpdatePlayerCamera(float dt, Vector3 playerPosition);
 
 		float GetNearPlane() const {
 			return nearPlane;

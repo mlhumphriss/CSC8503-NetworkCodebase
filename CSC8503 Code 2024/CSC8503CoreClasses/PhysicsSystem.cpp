@@ -66,6 +66,7 @@ int realHZ		= idealHZ;
 float realDT	= idealDT;
 
 void PhysicsSystem::Update(float dt) {	
+
 	if (Window::GetKeyboard()->KeyPressed(KeyCodes::B)) {
 		useBroadPhase = !useBroadPhase;
 		std::cout << "Setting broadphase to " << useBroadPhase << std::endl;
@@ -242,6 +243,7 @@ void PhysicsSystem::ImpulseResolveCollision(GameObject& a, GameObject& b, Collis
 	if (totalMass == 0) {
 		return;
 	}
+
 	transformA.SetPosition(transformA.GetPosition() - (p.normal * p.penetration * (physA->GetInverseMass() / totalMass)));
 	transformB.SetPosition(transformB.GetPosition() + (p.normal * p.penetration * (physB->GetInverseMass() / totalMass)));
 
@@ -403,8 +405,13 @@ void PhysicsSystem::IntegrateVelocity(float dt) {
 		orientation.Normalise();
 
 		transform.SetOrientation(orientation);
-
-		float framAngularDamping = 1.0f - (linearDamping * dt);
+		float framAngularDamping;
+		if ((*i)->GetBoundingVolume()->type == VolumeType::OBB) {
+			framAngularDamping = 1.0f - (2* linearDamping * dt);
+		}
+		else {
+			framAngularDamping = 1.0f - (linearDamping * dt);
+		}
 		angVel = angVel * framAngularDamping;
 		object->SetAngularVelocity(angVel);//*/
 	}

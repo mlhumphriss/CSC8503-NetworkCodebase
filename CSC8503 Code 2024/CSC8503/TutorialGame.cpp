@@ -88,8 +88,9 @@ TutorialGame::~TutorialGame()	{
 
 void TutorialGame::UpdateGame(float dt) {
 	if (!inSelectionMode) {
-		world->GetMainCamera().UpdateCamera(dt);
-		world->GetPlayer()->UpdateMovement();
+		Vector3 playerPosition = world->GetPlayer()->GetTransform().GetPosition(); //assign this to players position
+		world->GetMainCamera().UpdatePlayerCamera(dt, playerPosition);
+		world->GetPlayer()->UpdateMovement(dt);
 	}
 	if (lockedObject != nullptr) {
 		Vector3 objPos = lockedObject->GetTransform().GetPosition();
@@ -266,7 +267,7 @@ void TutorialGame::InitCamera() {
 	world->GetMainCamera().SetNearPlane(0.1f);
 	world->GetMainCamera().SetFarPlane(700.0f);
 	world->GetMainCamera().SetPitch(-15.0f);
-	world->GetMainCamera().SetYaw(315.0f);
+	world->GetMainCamera().SetYaw(-180.0f);
 	world->GetMainCamera().SetPosition(Vector3(-60, 40, 60));
 	lockedObject = nullptr;
 }
@@ -341,6 +342,7 @@ GameObject* TutorialGame::AddSphereToWorld(const Vector3& position, float radius
 
 GameObject* TutorialGame::AddCubeToWorld(const Vector3& position, Vector3 dimensions, float inverseMass) {
 	GameObject* cube = new GameObject();
+	cube->SetDim(dimensions);
 
 	//AABBVolume* volume = new AABBVolume(dimensions);
 	OBBVolume* volume = new OBBVolume(dimensions);
