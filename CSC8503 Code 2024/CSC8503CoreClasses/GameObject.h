@@ -3,6 +3,8 @@
 #include "CollisionVolume.h"
 #include "Controller.h"
 #include "Camera.h"
+#include "Ray.h"
+//#include "GameWorld.h"
 
 using std::vector;
 
@@ -127,18 +129,22 @@ namespace NCL::CSC8503 {
 			speed = 25.0f;
 		}
 		~PlayerObject();
-		void UpdateMovement(float dt);
+		void UpdateMovement(float dt /*, GameWorld* world*/);
 
 		void SetController(const Controller& c) {
 			playerController = &c;
 		}
+
+		typedef std::function<bool(Ray& r, RayCollision& closestCollision, bool closestObject, GameObject* ignore)> RaycastToWorld;
+		void SetRay(RaycastToWorld rayHit) { this->rayHit = rayHit; }
+		RaycastToWorld rayHit;
 		
 
 	protected:
 		Camera* playerCam;
 		float pYaw;
 		float speed;
-		
+
 		const Controller* playerController = nullptr;
 	};
 }

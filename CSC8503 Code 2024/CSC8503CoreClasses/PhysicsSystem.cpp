@@ -18,6 +18,7 @@ PhysicsSystem::PhysicsSystem(GameWorld& g) : gameWorld(g)	{
 	dTOffset		= 0.0f;
 	globalDamping	= 0.995f;
 	linearDamping = 0.66f;
+	floorPos = Vector3(0.0f, -20.0f, 0.0f);
 	SetGravity(Vector3(0.0f, -9.8f, 0.0f));
 }
 
@@ -96,7 +97,7 @@ void PhysicsSystem::Update(float dt, GameWorld* world) {
 	while(dTOffset > realDT) {
 		Vector3 playerPosition = world->GetPlayer()->GetTransform().GetPosition(); //assign this to players position
 		world->GetMainCamera().UpdatePlayerCamera(realDT, playerPosition);
-		world->GetPlayer()->UpdateMovement(realDT);
+		world->GetPlayer()->UpdateMovement(realDT /*, world*/);
 
 		IntegrateAccel(realDT); //Update accelerations from external forces
 		if (useBroadPhase) {

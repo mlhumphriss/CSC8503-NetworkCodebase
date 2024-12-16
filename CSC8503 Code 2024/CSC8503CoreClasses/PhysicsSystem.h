@@ -46,6 +46,7 @@ namespace NCL {
 
 			GameWorld& gameWorld;
 
+			Vector3 floorPos;
 			bool	applyGravity;
 			Vector3 gravity;
 			float	dTOffset;
