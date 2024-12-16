@@ -100,9 +100,6 @@ namespace NCL::CSC8503 {
 			return dim;
 		}
 
-		int		GetWorldID() const {
-			return worldID;
-		}
 
 	protected:
 		Transform			transform;
