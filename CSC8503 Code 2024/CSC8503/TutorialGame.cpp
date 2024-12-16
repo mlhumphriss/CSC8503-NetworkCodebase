@@ -281,7 +281,7 @@ void TutorialGame::InitWorld() {
 
 	//InitMixedGridWorld(15, 15, 3.5f, 3.5f);
 	//BridgeConstraintTest();
-	InitTable(Vector3(0,0,0));
+	InitTable(Vector3(0,-18,0));
 	InitGameExamples();
 	InitDefaultFloor();
 	//testStateObject = AddStateObjectToWorld(Vector3(0, 10, 0));
