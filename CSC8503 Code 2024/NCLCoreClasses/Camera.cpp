@@ -42,7 +42,7 @@ void Camera::UpdatePlayerCamera(float dt, Vector3 playerPosition) {
 	Vector3 camPos = playerPosition + offset;
 	position = camPos;
 
-	position.y += activeController->GetNamedAxis("UpDown") * frameSpeed;
+	//position.y += activeController->GetNamedAxis("UpDown") * frameSpeed;
 
 }
 
