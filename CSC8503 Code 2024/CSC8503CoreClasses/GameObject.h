@@ -129,7 +129,7 @@ namespace NCL::CSC8503 {
 			speed = 25.0f;
 		}
 		~PlayerObject();
-		void UpdateMovement(float dt /*, GameWorld* world*/);
+		void UpdateMovement(float dt);
 
 		void SetController(const Controller& c) {
 			playerController = &c;

@@ -57,7 +57,7 @@ void GameObject::UpdateBroadphaseAABB() {
 PlayerObject::~PlayerObject() {
 }
 
-void PlayerObject::UpdateMovement(float dt /*, GameWorld* world*/) {
+void PlayerObject::UpdateMovement(float dt) {
 	if (!playerController) {
 		return;
 	}
@@ -75,17 +75,17 @@ void PlayerObject::UpdateMovement(float dt /*, GameWorld* world*/) {
 	Matrix3 yawRotation = Matrix::RotationMatrix3x3(pYaw, Vector3(0, 1, 0));
 	*/
 	this->GetTransform().SetOrientation(yawRotation);
-	/**/
+	
 	Ray r = Ray(this->GetTransform().GetPosition(), Vector3(0.0f, -1.0f, 0.0f));
 	RayCollision collision;
-	bool collides = rayHit(r, collision, true, this);//*/
+	bool collides = rayHit(r, collision, true, this);
 	bool noJump = false;
 	if (collision.rayDistance > 5.0f + FLT_EPSILON) { noJump = true; }
 
 	Vector3 jump = Vector3(0.0f, 15.0f, 0.0f);
 	Vector3 movement = yawRotation * Vector3(0, 0, playerController->GetNamedAxis("Forward")) * speed*dt;
 	movement += yawRotation * Vector3(-playerController->GetNamedAxis("Sidestep"), 0, 0) * speed*dt;
-	if (Window::GetKeyboard()->KeyPressed(KeyCodes::SPACE)&& noJump==false) {
+	if (Window::GetKeyboard()->KeyPressed(KeyCodes::SPACE) && noJump==false) {
 		movement += jump;
 	}
 	this->GetPhysicsObject()->ApplyLinearImpulse(movement);

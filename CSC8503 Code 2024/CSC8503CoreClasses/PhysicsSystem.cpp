@@ -97,7 +97,7 @@ void PhysicsSystem::Update(float dt, GameWorld* world) {
 	while(dTOffset > realDT) {
 		Vector3 playerPosition = world->GetPlayer()->GetTransform().GetPosition(); //assign this to players position
 		world->GetMainCamera().UpdatePlayerCamera(realDT, playerPosition);
-		world->GetPlayer()->UpdateMovement(realDT /*, world*/);
+		world->GetPlayer()->UpdateMovement(realDT);
 
 		IntegrateAccel(realDT); //Update accelerations from external forces
 		if (useBroadPhase) {
