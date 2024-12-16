@@ -75,7 +75,20 @@ void PlayerObject::UpdateMovement(float dt) {
 	*/
 	this->GetTransform().SetOrientation(yawRotation);
 
+
+
+
+	Vector3 jump = Vector3(0.0f, 15.0f, 0.0f);
 	Vector3 movement = yawRotation * Vector3(0, 0, playerController->GetNamedAxis("Forward")) * speed*dt;
 	movement += yawRotation * Vector3(-playerController->GetNamedAxis("Sidestep"), 0, 0) * speed*dt;
+	if (Window::GetKeyboard()->KeyPressed(KeyCodes::SPACE)) {
+		movement += jump;
+	}
 	this->GetPhysicsObject()->ApplyLinearImpulse(movement);
+
+	/*
+	Vector3 jump = Vector3(0.0f, 10.0f, 0.0f);
+	if (Window::GetKeyboard()->KeyPressed(KeyCodes::SPACE)) {
+		this->GetPhysicsObject()->ApplyLinearImpulse(jump);
+	}*/
 }

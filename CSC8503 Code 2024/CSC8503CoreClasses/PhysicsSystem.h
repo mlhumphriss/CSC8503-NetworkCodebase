@@ -10,7 +10,7 @@ namespace NCL {
 
 			void Clear();
 
-			void Update(float dt);
+			void Update(float dt, GameWorld* world);
 
 			void UseGravity(bool state) {
 				applyGravity = state;

@@ -13,6 +13,7 @@ GameWorld::GameWorld()	{
 	shuffleObjects		= false;
 	worldIDCounter		= 0;
 	worldStateCounter	= 0;
+	selectMode = false;
 }
 
 GameWorld::~GameWorld()	{
@@ -23,6 +24,7 @@ void GameWorld::Clear() {
 	constraints.clear();
 	worldIDCounter		= 0;
 	worldStateCounter	= 0;
+	selectMode = false;
 }
 
 void GameWorld::ClearAndErase() {

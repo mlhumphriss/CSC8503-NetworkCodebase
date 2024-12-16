@@ -63,6 +63,14 @@ namespace NCL {
 				return worldStateCounter;
 			}
 
+			bool GetSelectMode() const {
+				return selectMode;
+			}
+
+			void SetSelectMode(bool s) {
+				selectMode = s;
+			}
+
 		protected:
 			std::vector<GameObject*> gameObjects;
 			std::vector<Constraint*> constraints;
@@ -74,6 +82,7 @@ namespace NCL {
 			bool shuffleObjects;
 			int		worldIDCounter;
 			int		worldStateCounter;
+			bool selectMode;
 		};
 	}
 }

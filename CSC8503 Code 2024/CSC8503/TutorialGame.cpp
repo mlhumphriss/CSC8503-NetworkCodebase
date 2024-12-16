@@ -88,10 +88,13 @@ TutorialGame::~TutorialGame()	{
 
 void TutorialGame::UpdateGame(float dt) {
 	if (!inSelectionMode) {
+		world->SetSelectMode(false);
+		/**
 		Vector3 playerPosition = world->GetPlayer()->GetTransform().GetPosition(); //assign this to players position
 		world->GetMainCamera().UpdatePlayerCamera(dt, playerPosition);
-		world->GetPlayer()->UpdateMovement(dt);
+		world->GetPlayer()->UpdateMovement(dt);*/
 	}
+	else { world->SetSelectMode(true); }
 	if (lockedObject != nullptr) {
 		Vector3 objPos = lockedObject->GetTransform().GetPosition();
 		Vector3 camPos = objPos + lockedOffset;
@@ -152,7 +155,7 @@ void TutorialGame::UpdateGame(float dt) {
 
 	world->UpdateWorld(dt);
 	renderer->Update(dt);
-	physics->Update(dt);
+	physics->Update(dt, world);
 
 	renderer->Render();
 	Debug::UpdateRenderables(dt);

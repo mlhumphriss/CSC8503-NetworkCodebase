@@ -65,7 +65,7 @@ being at a low rate.
 int realHZ		= idealHZ;
 float realDT	= idealDT;
 
-void PhysicsSystem::Update(float dt) {	
+void PhysicsSystem::Update(float dt, GameWorld* world) {	
 
 	if (Window::GetKeyboard()->KeyPressed(KeyCodes::B)) {
 		useBroadPhase = !useBroadPhase;
@@ -94,6 +94,10 @@ void PhysicsSystem::Update(float dt) {
 	}
 	int iteratorCount = 0;
 	while(dTOffset > realDT) {
+		Vector3 playerPosition = world->GetPlayer()->GetTransform().GetPosition(); //assign this to players position
+		world->GetMainCamera().UpdatePlayerCamera(realDT, playerPosition);
+		world->GetPlayer()->UpdateMovement(realDT);
+
 		IntegrateAccel(realDT); //Update accelerations from external forces
 		if (useBroadPhase) {
 			BroadPhase();
