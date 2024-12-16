@@ -279,8 +279,9 @@ void TutorialGame::InitWorld() {
 	world->ClearAndErase();
 	physics->Clear();
 
-	InitMixedGridWorld(15, 15, 3.5f, 3.5f);
+	//InitMixedGridWorld(15, 15, 3.5f, 3.5f);
 	//BridgeConstraintTest();
+	InitTable(Vector3(0,0,0));
 	InitGameExamples();
 	InitDefaultFloor();
 	//testStateObject = AddStateObjectToWorld(Vector3(0, 10, 0));
@@ -531,6 +532,18 @@ void TutorialGame::InitCubeGridWorld(int numRows, int numCols, float rowSpacing,
 		}
 	}
 }
+
+void TutorialGame::InitTable(const Vector3 tablePos) {
+	Vector3 legDims = Vector3(0.5f, 2.0f, 0.5f);
+	Vector3 tabTopDims = Vector3(5.0f, 0.25f, 10.0f);
+	Vector3 positions[5] = { Vector3(0.5f, 2.0f, 0.5f),Vector3(9.5f, 2.0f,0.5f), Vector3(0.5f,2.0f,19.5f), Vector3(9.5f, 2.0f, 19.5f), Vector3(5.0f, 4.25f,10.0f) };
+	for (int i = 0; i < 4; ++i) {
+		AddCubeToWorld(tablePos + positions[i], legDims, 0.0f);
+	}
+	AddCubeToWorld(tablePos + positions[4], tabTopDims, 0.0f);
+
+}
+
 
 /*
 Every frame, this code will let you perform a raycast, to see if there's an object
