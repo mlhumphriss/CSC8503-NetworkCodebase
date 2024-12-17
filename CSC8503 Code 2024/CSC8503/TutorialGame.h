@@ -37,6 +37,7 @@ namespace NCL {
 			void InitMixedGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing);
 			void InitCubeGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing, const Vector3& cubeDims);
 			void InitTable(const Vector3 tablePos);
+			void InitMapWalls(const Vector3 mapDims, float mapHeight);
 			
 
 			void InitDefaultFloor();

@@ -485,6 +485,7 @@ void TutorialGame::BridgeConstraintTest() {
 
 void TutorialGame::InitDefaultFloor() {
 	AddFloorToWorld(Vector3(0, -20, 0));
+	InitMapWalls(Vector3(200, 2, 200), -20.0f);
 }
 
 void TutorialGame::InitGameExamples() {
@@ -544,6 +545,14 @@ void TutorialGame::InitTable(const Vector3 tablePos) {
 
 }
 
+void TutorialGame::InitMapWalls(const Vector3 mapSize, float mapHeight) {
+	Vector3 wallDimsZ = Vector3(mapSize.x, 15.0f, 5.0f);
+	Vector3 wallDimsX = Vector3(5.0f, 15.0f, mapSize.z);
+	AddCubeToWorld(Vector3(0.0f, mapHeight + 15.0f,  mapSize.z), wallDimsZ, 0.0f);
+	AddCubeToWorld(Vector3(0.0f, mapHeight + 15.0f, -mapSize.z), wallDimsZ, 0.0f);
+	AddCubeToWorld(Vector3( mapSize.x, mapHeight + 15.0f, 0.0f), wallDimsX, 0.0f);
+	AddCubeToWorld(Vector3(-mapSize.x, mapHeight + 15.0f, 0.0f), wallDimsX, 0.0f);
+}
 
 /*
 Every frame, this code will let you perform a raycast, to see if there's an object
