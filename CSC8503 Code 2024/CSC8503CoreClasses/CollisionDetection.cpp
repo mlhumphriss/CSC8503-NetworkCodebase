@@ -136,7 +136,39 @@ bool CollisionDetection::RaySphereIntersection(const Ray&r, const Transform& wor
 }
 
 bool CollisionDetection::RayCapsuleIntersection(const Ray& r, const Transform& worldTransform, const CapsuleVolume& volume, RayCollision& collision) {
+	Vector3 position = worldTransform.GetPosition();
+	Matrix3 rotation = Quaternion::RotationMatrix<Matrix3>(worldTransform.GetOrientation());
+	Vector3 offset = (rotation * Vector3(0.0f, 1.0f, 0.0f) * (volume.GetHalfHeight() - volume.GetRadius()));
+	Vector3 capTop = position + offset;
+	Vector3 capBot = position - offset;
 
+	Vector3 pointC = position + Vector::Cross(capTop - position, Vector::Normalise(position - r.GetDirection()));
+
+	Plane p = Plane::PlaneFromTri(position, capTop, pointC);
+	if (!RayPlaneIntersection(r, p, collision)) { return false; }
+
+	Vector3 rayPoint = collision.collidedAt;
+	Vector3 v1Top = rayPoint - capTop;
+	Vector3 v2Top = capTop - position;
+	Vector3 v1Bot = rayPoint - capBot;
+	Vector3 v2Bot = capBot - position;
+
+	Transform tempSphere = worldTransform;
+	if (Vector::Dot(v1Top, v2Top) < 0.0f) {
+		tempSphere.SetPosition(capTop);
+		return RaySphereIntersection(r, tempSphere, (SphereVolume&)volume, collision);
+	}
+	else if (Vector::Dot(v1Bot, v2Bot) > 0.0f) {
+		tempSphere.SetPosition(capBot);
+		return RaySphereIntersection(r, tempSphere, (SphereVolume&)volume, collision);
+	}
+	else {
+		float projection = Vector::Dot(rayPoint - position, rotation * Vector3(0.0f, 1.0f, 0.0f));
+		Vector3 dis = position + rotation * Vector3(0.0f, 1.0f, 0.0f) * projection;
+		if (Vector::Length(dis - position) > volume.GetRadius()) { return false; }
+		tempSphere.SetPosition(dis);
+		return RaySphereIntersection(r, tempSphere, (SphereVolume&)volume, collision);
+	}
 
 	return false;
 }

@@ -280,8 +280,8 @@ void TutorialGame::InitWorld() {
 	physics->Clear();
 
 	//InitMixedGridWorld(15, 15, 3.5f, 3.5f);
-	//BridgeConstraintTest();
-	InitTable(Vector3(0,-18,0));
+	BridgeConstraintTest();
+	InitTable(Vector3(-10,-18,0));
 	InitGameExamples();
 	InitDefaultFloor();
 	//testStateObject = AddStateObjectToWorld(Vector3(0, 10, 0));
@@ -292,14 +292,20 @@ void TutorialGame::InitWorld() {
 A single function to add a large immoveable cube to the bottom of our world
 
 */
-GameObject* TutorialGame::AddFloorToWorld(const Vector3& position) {
+GameObject* TutorialGame::AddFloorToWorld(const Vector3& position, bool obb) {
 	GameObject* floor = new GameObject();
 	floor->SetAsFloor(true);
 
 	Vector3 floorSize = Vector3(200, 2, 200);
-	OBBVolume* volume = new OBBVolume(floorSize);
-	//AABBVolume* volume = new AABBVolume(floorSize);
-	floor->SetBoundingVolume((CollisionVolume*)volume);
+	if (!obb) {
+		AABBVolume* volume = new AABBVolume(floorSize);
+		floor->SetBoundingVolume((CollisionVolume*)volume);
+	}
+	else{
+		OBBVolume* volume = new OBBVolume(floorSize); 
+		floor->SetBoundingVolume((CollisionVolume*)volume);
+	}
+	
 	floor->GetTransform()
 		.SetScale(floorSize * 2.0f)
 		.SetPosition(position);
@@ -459,22 +465,22 @@ StateGameObject* TutorialGame::AddStateObjectToWorld(const Vector3& position) {
 }
 
 void TutorialGame::BridgeConstraintTest() {
-	Vector3 cubeSize = Vector3(8, 8, 8);
+	Vector3 cubeSize = Vector3(4, 4, 4);
 
 	float invCubeMass = 5;
-	int numLinks = 10;
-	float maxDistance = 30;
-	float cubeDistance = 20;
+	int numLinks = 5;
+	float maxDistance = 20;
+	float cubeDistance = 15;
 
-	Vector3 startPos = Vector3(0, 100, 0);
+	Vector3 startPos = Vector3(20, -20, -30);
 
 	GameObject* start = AddCubeToWorld(startPos + Vector3(0, 0, 0), cubeSize, 0);
-	GameObject* end = AddCubeToWorld(startPos + Vector3((numLinks+2)*cubeDistance, 0, 0), cubeSize, 0);
+	GameObject* end = AddCubeToWorld(startPos + Vector3((numLinks + 2) * cubeDistance, (numLinks + 2) * cubeDistance * 0.75f, 0), cubeSize, 0);
 
 	GameObject* previous = start;
 
 	for (int i = 0; i < numLinks; ++i) {
-		GameObject* block = AddCubeToWorld(startPos + Vector3((i + 1) * cubeDistance, 0, 0), cubeSize, invCubeMass);
+		GameObject* block = AddCubeToWorld(startPos + Vector3((i + 1) * cubeDistance, (i + 1) * cubeDistance * 0.75f, 0), cubeSize, invCubeMass);
 		PositionConstraint* constraint = new PositionConstraint(previous, block, maxDistance);
 		world->AddConstraint(constraint);
 		previous = block;
@@ -484,7 +490,7 @@ void TutorialGame::BridgeConstraintTest() {
 }
 
 void TutorialGame::InitDefaultFloor() {
-	AddFloorToWorld(Vector3(0, -20, 0));
+	AddFloorToWorld(Vector3(0, -20, 0), true);
 	InitMapWalls(Vector3(200, 2, 200), -20.0f);
 }
 
@@ -501,7 +507,7 @@ void TutorialGame::InitSphereGridWorld(int numRows, int numCols, float rowSpacin
 			AddSphereToWorld(position, radius, 1.0f);
 		}
 	}
-	AddFloorToWorld(Vector3(0, -2, 0));
+	AddFloorToWorld(Vector3(0, -2, 0), false);
 }
 
 void TutorialGame::InitMixedGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing) {
