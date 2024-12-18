@@ -283,9 +283,10 @@ void TutorialGame::InitWorld() {
 
 	//InitMixedGridWorld(15, 15, 3.5f, 3.5f);
 	BridgeConstraintTest();
-	InitTable(Vector3(-10,-18,0));
+	InitTable(Vector3(-30,-18,20));
 	InitGameExamples();
 	InitDefaultFloor();
+	InitMaze();
 	//testStateObject = AddStateObjectToWorld(Vector3(0, 10, 0));
 }
 /**/
@@ -308,11 +309,10 @@ void TutorialGame::AddKittenConstraints() {
 A single function to add a large immoveable cube to the bottom of our world
 
 */
-GameObject* TutorialGame::AddFloorToWorld(const Vector3& position, bool obb) {
+GameObject* TutorialGame::AddFloorToWorld(const Vector3& position, Vector3 floorSize, bool obb) {
 	GameObject* floor = new GameObject();
 	floor->SetAsFloor(true);
 
-	Vector3 floorSize = Vector3(200, 2, 200);
 	if (!obb) {
 		AABBVolume* volume = new AABBVolume(floorSize);
 		floor->SetBoundingVolume((CollisionVolume*)volume);
@@ -531,13 +531,36 @@ void TutorialGame::BridgeConstraintTest() {
 }
 
 void TutorialGame::InitDefaultFloor() {
-	AddFloorToWorld(Vector3(0, -20, 0), true);
+	AddFloorToWorld(Vector3(0, -20, 0), Vector3(200, 2, 200),true);
+	AddFloorToWorld(Vector3(80, -3, 80), Vector3(80, 2, 80), true);
 	InitMapWalls(Vector3(200, 2, 200), -20.0f);
 }
 
+void TutorialGame::InitMaze() {
+	Vector3 wallCubeSize = Vector3(5.0f, 5.0f, 5.0f);
+	float worldToLocalScale = 10.0f;
+	for (int i = 0; i < 16; i++) {
+		if (i != 10) {
+			for (int j = 0; j < 16; j++) {
+				if (i == 0 || i == 15) { AddCubeToWorld(Vector3(10 * i + 5, 4, 10 * j + 5), wallCubeSize, 0); }
+				else if (j == 0 || j == 15) { AddCubeToWorld(Vector3(10 * i + 5, 4, 10 * j + 5), wallCubeSize, 0); }
+			}
+		
+		}
+	}
+
+
+	
+	//AddCubeToWorld(Vector3(5, 4, 5), wallCubeSize, 0);
+	
+
+}
+
+
+
 void TutorialGame::InitGameExamples() {
-	AddPlayerToWorld(Vector3(10, 5, 0));
-	AddKittenToWorld(Vector3(11, 5, 0));
+	AddPlayerToWorld(Vector3(10, 5, -10));
+	AddKittenToWorld(Vector3(15, 5, -10));
 	//AddEnemyToWorld(Vector3(5, 5, 0));
 	//AddBonusToWorld(Vector3(10, 5, 0));
 }
@@ -549,7 +572,7 @@ void TutorialGame::InitSphereGridWorld(int numRows, int numCols, float rowSpacin
 			AddSphereToWorld(position, radius, 1.0f);
 		}
 	}
-	AddFloorToWorld(Vector3(0, -2, 0), false);
+	AddFloorToWorld(Vector3(0, -2, 0), Vector3(200, 2, 200), false);
 }
 
 void TutorialGame::InitMixedGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing) {
