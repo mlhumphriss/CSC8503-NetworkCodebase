@@ -42,6 +42,7 @@ namespace NCL {
 
 			void InitDefaultFloor();
 			void BridgeConstraintTest();
+			void AddKittenConstraints();
 
 			bool SelectObject();
 			void MoveSelectedObject();
@@ -57,6 +58,7 @@ namespace NCL {
 			GameObject* AddPlayerToWorld(const Vector3& position);
 			GameObject* AddEnemyToWorld(const Vector3& position);
 			GameObject* AddBonusToWorld(const Vector3& position);
+			GameObject* AddKittenToWorld(const Vector3& position);
 
 			StateGameObject* AddStateObjectToWorld(const Vector3& position);
 			StateGameObject* testStateObject;

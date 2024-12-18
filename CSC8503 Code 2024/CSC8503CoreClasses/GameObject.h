@@ -101,7 +101,9 @@ namespace NCL::CSC8503 {
 		Vector3 GetDim() const {
 			return dim;
 		}
-
+		int GetTag() const {
+			return tag;
+		}
 
 	protected:
 		Transform			transform;
@@ -112,6 +114,7 @@ namespace NCL::CSC8503 {
 		NetworkObject*		networkObject;
 
 		Vector3		dim;
+		int			tag; //1 player, 2 kitten, 3 enemy, 4 bonus, 5 key
 
 		bool		grounded;
 		bool		isFloor;
@@ -127,6 +130,7 @@ namespace NCL::CSC8503 {
 		PlayerObject() : GameObject() {// When called need to pass in active controller somehow
 			pYaw = 0.0f;
 			speed = 25.0f;
+			tag = 1;
 		}
 		~PlayerObject();
 		void UpdateMovement(float dt);
@@ -146,6 +150,42 @@ namespace NCL::CSC8503 {
 		float speed;
 
 		const Controller* playerController = nullptr;
+	};
+
+	class KittenObject : public GameObject {
+	public:
+		KittenObject() :GameObject() {
+			tag = 2;
+			collected = false;
+			following = false;
+		}
+		~KittenObject();
+
+		virtual void OnCollisionBegin(GameObject* otherObject) override {
+			if (otherObject->GetTag() == 1) {
+				collected = true;
+				player = (PlayerObject*)otherObject;
+				std::cout << "yes" << "\n";
+			}
+		}
+		
+		void SetFollowing(bool f) {
+			following = f;
+		}
+
+		bool GetFollowing() const {
+			return following;
+		}
+
+		bool GetCollected() const {
+			return collected;
+		}
+
+	protected:
+		bool collected;
+		bool following;
+		PlayerObject* player;
+
 	};
 }
 

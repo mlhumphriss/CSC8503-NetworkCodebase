@@ -42,6 +42,10 @@ void GameWorld::AddGameObject(GameObject* o) {
 	o->SetWorldID(worldIDCounter++);
 	worldStateCounter++;
 }
+void GameWorld::AddKittenObject(KittenObject* k) {
+	kittens.emplace_back(k);
+}
+
 void GameWorld::AddPlayerObject(PlayerObject* p) {
 	player = p;
 }
@@ -61,6 +65,14 @@ void GameWorld::GetObjectIterators(
 	first	= gameObjects.begin();
 	last	= gameObjects.end();
 }
+void GameWorld::GetKittenIterators(
+	KittenIterator& first,
+	KittenIterator& last) const {
+
+	first = kittens.begin();
+	last = kittens.end();
+}
+
 
 void GameWorld::OperateOnContents(GameObjectFunc f) {
 	for (GameObject* g : gameObjects) {

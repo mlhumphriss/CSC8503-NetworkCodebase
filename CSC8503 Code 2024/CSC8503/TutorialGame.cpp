@@ -6,6 +6,7 @@
 
 #include "PositionConstraint.h"
 #include "OrientationConstraint.h"
+#include "fc.h"
 #include "StateGameObject.h"
 
 
@@ -152,6 +153,7 @@ void TutorialGame::UpdateGame(float dt) {
 
 	SelectObject();
 	MoveSelectedObject();
+	AddKittenConstraints();
 
 	world->UpdateWorld(dt);
 	renderer->Update(dt);
@@ -286,7 +288,21 @@ void TutorialGame::InitWorld() {
 	InitDefaultFloor();
 	//testStateObject = AddStateObjectToWorld(Vector3(0, 10, 0));
 }
+/**/
+void TutorialGame::AddKittenConstraints() {
+	std::vector<KittenObject*>::const_iterator first;
+	std::vector<KittenObject*>::const_iterator last;
+	world->GetKittenIterators(first, last);
+	for (auto i = first; i != last; ++i) {
+		if ((*i)->GetCollected() == true && (*i)->GetFollowing() == false) {
+			FollowConstraint* constraint = new FollowConstraint((*i), world->GetPlayer(), 5.0f);
+			world->AddConstraint(constraint);
+			(*i)->SetFollowing(true);
+		}
+	}
 
+}
+//*/
 /*
 
 A single function to add a large immoveable cube to the bottom of our world
@@ -400,6 +416,31 @@ GameObject* TutorialGame::AddPlayerToWorld(const Vector3& position) {
 	return character;
 }
 
+GameObject* TutorialGame::AddKittenToWorld(const Vector3& position) {
+	float meshSize = 1.0f;
+	float inverseMass = 0.5f;
+
+	KittenObject* character = new KittenObject();
+	SphereVolume* volume = new SphereVolume(1.0f);
+
+	character->SetBoundingVolume((CollisionVolume*)volume);
+
+	character->GetTransform()
+		.SetScale(Vector3(meshSize, meshSize, meshSize))
+		.SetPosition(position);
+
+	character->SetRenderObject(new RenderObject(&character->GetTransform(), kittenMesh, nullptr, basicShader));
+	character->SetPhysicsObject(new PhysicsObject(&character->GetTransform(), character->GetBoundingVolume()));
+
+	character->GetPhysicsObject()->SetInverseMass(inverseMass);
+	character->GetPhysicsObject()->InitSphereInertia();
+
+	world->AddGameObject(character);
+	world->AddKittenObject(character);
+
+	return character;
+}
+
 GameObject* TutorialGame::AddEnemyToWorld(const Vector3& position) {
 	float meshSize		= 3.0f;
 	float inverseMass	= 0.5f;
@@ -496,6 +537,7 @@ void TutorialGame::InitDefaultFloor() {
 
 void TutorialGame::InitGameExamples() {
 	AddPlayerToWorld(Vector3(10, 5, 0));
+	AddKittenToWorld(Vector3(11, 5, 0));
 	//AddEnemyToWorld(Vector3(5, 5, 0));
 	//AddBonusToWorld(Vector3(10, 5, 0));
 }

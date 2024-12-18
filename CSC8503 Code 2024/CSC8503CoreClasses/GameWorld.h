@@ -14,6 +14,7 @@ namespace NCL {
 
 		typedef std::function<void(GameObject*)> GameObjectFunc;
 		typedef std::vector<GameObject*>::const_iterator GameObjectIterator;
+		typedef std::vector<KittenObject*>::const_iterator KittenIterator;
 
 		class GameWorld	{
 		public:
@@ -25,6 +26,7 @@ namespace NCL {
 
 			void AddGameObject(GameObject* o);
 			void AddPlayerObject(PlayerObject* p);
+			void AddKittenObject(KittenObject* k);
 			void RemoveGameObject(GameObject* o, bool andDelete = false);
 
 			void AddConstraint(Constraint* c);
@@ -44,6 +46,10 @@ namespace NCL {
 			void ShuffleObjects(bool state) {
 				shuffleObjects = state;
 			}
+			void ShuffleKittens(bool state) {
+				shuffleKittens = state;
+			}
+
 
 			bool Raycast(Ray& r, RayCollision& closestCollision, bool closestObject = false, GameObject* ignore = nullptr) const;
 
@@ -58,6 +64,10 @@ namespace NCL {
 			void GetConstraintIterators(
 				std::vector<Constraint*>::const_iterator& first,
 				std::vector<Constraint*>::const_iterator& last) const;
+
+			void GetKittenIterators(
+				KittenIterator& first,
+				KittenIterator& last) const;
 
 			int GetWorldStateID() const {
 				return worldStateCounter;
@@ -74,12 +84,14 @@ namespace NCL {
 		protected:
 			std::vector<GameObject*> gameObjects;
 			std::vector<Constraint*> constraints;
+			std::vector<KittenObject*> kittens;
 
 			PerspectiveCamera mainCamera;
 			PlayerObject* player;
 
 			bool shuffleConstraints;
 			bool shuffleObjects;
+			bool shuffleKittens;
 			int		worldIDCounter;
 			int		worldStateCounter;
 			bool selectMode;
