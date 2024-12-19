@@ -548,12 +548,72 @@ void TutorialGame::InitMaze() {
 		
 		}
 	}
-
-
-	
-	//AddCubeToWorld(Vector3(5, 4, 5), wallCubeSize, 0);
-	
-
+	AddCubeToWorld(Vector3(35, 4, 15), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(45, 4, 15), wallCubeSize, 0);
+	for (int i = 0; i < 7; i++) {
+		AddCubeToWorld(Vector3(65 + (i*10), 4, 25), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(25 + (i * 10), 4, 35), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(85, 4, 35), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(25, 4, 45), wallCubeSize, 0);
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(55 + (i * 10), 4, 45), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(85, 4, 45), wallCubeSize, 0);
+	for (int i = 0; i < 5; i++) {
+		AddCubeToWorld(Vector3(105 + (i * 10), 4, 45), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(25, 4, 55), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(35, 4, 55), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(95, 4, 65), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(115, 4, 65), wallCubeSize, 0);
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(135 + (i * 10), 4, 65), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(25 + (i * 10), 4, 75), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(65, 4, 75 + (i * 10)), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(85, 4, 75 + (i * 10)), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(95, 4, 75), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(115, 4, 75), wallCubeSize, 0);
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(45, 4, 85 + (i * 10)), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(115 + (i * 10), 4, 85), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(15 + (i * 10), 4, 95), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(105 + (i * 10), 4, 95), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(15, 4, 105 + (i * 10)), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(145, 4, 105), wallCubeSize, 0);
+	for (int i = 0; i < 4; i++) {
+		AddCubeToWorld(Vector3(115 + (i * 10), 4, 115), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 5; i++) {
+		AddCubeToWorld(Vector3(45 + (i * 10), 4, 125), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(25 + (i * 10), 4, 135), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 4; i++) {
+		AddCubeToWorld(Vector3(95 + (i * 10), 4, 135), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(55 + (i * 10), 4, 145), wallCubeSize, 0);
+	}
 }
 
 
