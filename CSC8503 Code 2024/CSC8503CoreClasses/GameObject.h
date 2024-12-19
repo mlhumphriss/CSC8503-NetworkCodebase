@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "Ray.h"
 #include "PhysicsObject.h"
+//#include "StateMachine.h"
 //#include "GameWorld.h"
 
 using std::vector;
@@ -141,6 +142,8 @@ namespace NCL::CSC8503 {
 		~PlayerObject();
 		void UpdateMovement(float dt);
 
+		bool InMaze();
+
 		virtual void OnCollisionBegin(GameObject* otherObject) override {
 			this->GetPhysicsObject()->SetIsFriction(true);
 
@@ -179,6 +182,7 @@ namespace NCL::CSC8503 {
 		int maxScore;
 		bool gameEnd;
 		Vector3 jump;
+		bool canChase;
 
 		const Controller* playerController = nullptr;
 	};
@@ -219,6 +223,7 @@ namespace NCL::CSC8503 {
 
 	};
 
+	class StateMachine;
 	class EnemyObject : public GameObject {
 	public:
 		EnemyObject() :GameObject() {
@@ -233,9 +238,19 @@ namespace NCL::CSC8503 {
 			}
 		}
 
+		Vector3 GetRespawn() {
+			return respawn;
+		}
+
+		void SetRespawn(Vector3 r) {
+			respawn = r;
+		}
+
 	protected:
 		Vector3 respawn;
 		Vector3 destination;
+
+		StateMachine* enemyStateMachine;
 	};
 }
 /* Enemy movement plan
@@ -243,8 +258,16 @@ State 1:If cat in maze, gets position, pathfinds to it, moves along route till g
 
 State 2: if within x of cat, chases it
 
-If below y of maze, respawns
+State 3: If cat not in maze, return to respawn
 
+State 4: If under maze, set position to respawn
+
+
+
+Behaviour Tree:
+	Check if player in maze: success move towards player, failure move towards respawn
+
+	Move towards player position:
 
 */
 

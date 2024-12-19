@@ -5,6 +5,9 @@
 #include "NetworkObject.h"
 #include "Camera.h"
 #include "Window.h"
+#include "StateTransition.h"
+#include "StateMachine.h"
+#include "State.h"
 
 
 using namespace NCL::CSC8503;
@@ -82,6 +85,7 @@ void PlayerObject::UpdateMovement(float dt) {
 	bool noJump = false;
 	if (collision.rayDistance > 5.0f + FLT_EPSILON) { noJump = true; }
 
+	canChase = InMaze();
 	
 	Vector3 movement = yawRotation * Vector3(0, 0, playerController->GetNamedAxis("Forward")) * speed*dt;
 	movement += yawRotation * Vector3(-playerController->GetNamedAxis("Sidestep"), 0, 0) * speed*dt;
@@ -90,3 +94,11 @@ void PlayerObject::UpdateMovement(float dt) {
 	}
 	this->GetPhysicsObject()->ApplyLinearImpulse(movement);
 }
+
+bool PlayerObject::InMaze() {
+	Vector3 currentPos = this->GetTransform().GetPosition();
+	if ((currentPos.x >= 10 || currentPos.x <= 150) && (currentPos.z >= 10 || currentPos.z <= 150) && (currentPos.y > -5)) { return true; }
+	return false;
+}
+
+

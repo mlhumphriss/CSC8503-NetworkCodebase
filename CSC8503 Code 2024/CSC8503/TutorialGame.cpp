@@ -8,7 +8,8 @@
 #include "OrientationConstraint.h"
 //#include "fc.h"
 #include "StateGameObject.h"
-
+#include "NavigationGrid.h"
+#include "NavigationMesh.h"
 
 
 using namespace NCL;
@@ -93,10 +94,6 @@ TutorialGame::~TutorialGame()	{
 void TutorialGame::UpdateGame(float dt) {
 	if (!inSelectionMode) {
 		world->SetSelectMode(false);
-		/**
-		Vector3 playerPosition = world->GetPlayer()->GetTransform().GetPosition(); //assign this to players position
-		world->GetMainCamera().UpdatePlayerCamera(dt, playerPosition);
-		world->GetPlayer()->UpdateMovement(dt);*/
 	}
 	else { world->SetSelectMode(true); }
 	if (lockedObject != nullptr) {
@@ -151,6 +148,8 @@ void TutorialGame::UpdateGame(float dt) {
 			objClosest->GetRenderObject()->SetColour(Vector4(1, 0, 1, 1));
 		}
 	}
+
+
 
 	if (testStateObject) {
 		testStateObject->Update(dt);
@@ -456,6 +455,7 @@ GameObject* TutorialGame::AddEnemyToWorld(const Vector3& position) {
 	float inverseMass	= 0.5f;
 
 	EnemyObject* character = new EnemyObject();
+	character->SetRespawn(position);
 
 	SphereVolume* volume = new SphereVolume(meshSize);
 	character->SetBoundingVolume((CollisionVolume*)volume);
@@ -491,6 +491,7 @@ GameObject* TutorialGame::AddBonusToWorld(const Vector3& position) {
 
 	apple->GetPhysicsObject()->SetInverseMass(1.0f);
 	apple->GetPhysicsObject()->InitSphereInertia();
+	apple->GetRenderObject()->SetColour(Vector4(0, 0, 1, 1));
 
 	world->AddGameObject(apple);
 
