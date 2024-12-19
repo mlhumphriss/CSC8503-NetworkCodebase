@@ -60,6 +60,7 @@ void TutorialGame::InitialiseAssets() {
 	kittenMesh	= renderer->LoadMesh("Kitten.msh");
 
 	enemyMesh	= renderer->LoadMesh("Keeper.msh");
+	gooseMesh = renderer->LoadMesh("Goose.msh");
 	bonusMesh	= renderer->LoadMesh("19463_Kitten_Head_v1.msh");
 	capsuleMesh = renderer->LoadMesh("capsule.msh");
 
@@ -79,6 +80,7 @@ TutorialGame::~TutorialGame()	{
 	delete kittenMesh;
 	delete enemyMesh;
 	delete bonusMesh;
+	delete gooseMesh;
 
 	delete basicTex;
 	delete basicShader;
@@ -453,22 +455,24 @@ GameObject* TutorialGame::AddEnemyToWorld(const Vector3& position) {
 	float meshSize		= 3.0f;
 	float inverseMass	= 0.5f;
 
-	GameObject* character = new GameObject();
+	EnemyObject* character = new EnemyObject();
 
-	AABBVolume* volume = new AABBVolume(Vector3(0.3f, 0.9f, 0.3f) * meshSize);
+	SphereVolume* volume = new SphereVolume(meshSize);
 	character->SetBoundingVolume((CollisionVolume*)volume);
 
 	character->GetTransform()
 		.SetScale(Vector3(meshSize, meshSize, meshSize))
 		.SetPosition(position);
 
-	character->SetRenderObject(new RenderObject(&character->GetTransform(), enemyMesh, nullptr, basicShader));
+	character->SetRenderObject(new RenderObject(&character->GetTransform(), gooseMesh, nullptr, basicShader));
 	character->SetPhysicsObject(new PhysicsObject(&character->GetTransform(), character->GetBoundingVolume()));
 
 	character->GetPhysicsObject()->SetInverseMass(inverseMass);
 	character->GetPhysicsObject()->InitSphereInertia();
+	character->GetRenderObject()->SetColour(Vector4(1,0,0,1));
 
 	world->AddGameObject(character);
+	world->AddEnemyObject(character);
 
 	return character;
 }
@@ -632,7 +636,7 @@ void TutorialGame::InitMaze() {
 void TutorialGame::InitGameExamples() {
 	AddPlayerToWorld(Vector3(10, 5, -10));
 	AddKittenToWorld(Vector3(15, 5, -10));
-	//AddEnemyToWorld(Vector3(5, 5, 0));
+	AddEnemyToWorld(Vector3(50, 10, 80));
 	//AddBonusToWorld(Vector3(10, 5, 0));
 }
 

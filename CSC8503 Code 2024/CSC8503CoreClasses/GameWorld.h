@@ -26,6 +26,7 @@ namespace NCL {
 
 			void AddGameObject(GameObject* o);
 			void AddPlayerObject(PlayerObject* p);
+			void AddEnemyObject(EnemyObject* e);
 			void AddKittenObject(KittenObject* k);
 			void RemoveGameObject(GameObject* o, bool andDelete = false);
 
@@ -37,6 +38,9 @@ namespace NCL {
 			}
 			PlayerObject* GetPlayer() {
 				return player;
+			}
+			EnemyObject* GetEnemy() {
+				return enemy;
 			}
 
 			void ShuffleConstraints(bool state) {
@@ -88,6 +92,7 @@ namespace NCL {
 
 			PerspectiveCamera mainCamera;
 			PlayerObject* player;
+			EnemyObject* enemy;
 
 			bool shuffleConstraints;
 			bool shuffleObjects;

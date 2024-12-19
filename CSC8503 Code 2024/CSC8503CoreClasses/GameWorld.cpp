@@ -50,6 +50,10 @@ void GameWorld::AddPlayerObject(PlayerObject* p) {
 	player = p;
 }
 
+void GameWorld::AddEnemyObject(EnemyObject* e) {
+	enemy = e;
+}
+
 void GameWorld::RemoveGameObject(GameObject* o, bool andDelete) {
 	gameObjects.erase(std::remove(gameObjects.begin(), gameObjects.end(), o), gameObjects.end());
 	if (andDelete) {

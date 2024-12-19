@@ -234,8 +234,17 @@ namespace NCL::CSC8503 {
 		}
 
 	protected:
-		
-
+		Vector3 respawn;
+		Vector3 destination;
 	};
 }
+/* Enemy movement plan
+State 1:If cat in maze, gets position, pathfinds to it, moves along route till gets to end, repeats
+
+State 2: if within x of cat, chases it
+
+If below y of maze, respawns
+
+
+*/
 
