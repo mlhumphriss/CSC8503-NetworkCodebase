@@ -102,3 +102,9 @@ bool PlayerObject::InMaze() {
 }
 
 
+EnemyObject::EnemyObject() :GameObject() {
+	tag = 3;
+
+	//state stuff add below
+
+}

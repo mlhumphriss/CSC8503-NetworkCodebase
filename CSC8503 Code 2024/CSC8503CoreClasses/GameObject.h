@@ -226,10 +226,7 @@ namespace NCL::CSC8503 {
 	class StateMachine;
 	class EnemyObject : public GameObject {
 	public:
-		EnemyObject() :GameObject() {
-			tag = 3;
-			
-		}
+		EnemyObject();
 		~EnemyObject();
 
 		virtual void OnCollisionBegin(GameObject* otherObject) override {
