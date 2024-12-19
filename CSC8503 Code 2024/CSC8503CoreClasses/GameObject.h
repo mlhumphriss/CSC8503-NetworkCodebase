@@ -259,7 +259,7 @@ State 3: If cat not in maze, return to respawn
 
 State 4: If under maze, set position to respawn
 
-
+State 5: if x,z at respawn, sit idle   INITIAL STATE
 
 Behaviour Tree:
 	Check if player in maze: success move towards player, failure move towards respawn

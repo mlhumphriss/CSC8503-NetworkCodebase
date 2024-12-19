@@ -104,6 +104,7 @@ bool PlayerObject::InMaze() {
 
 EnemyObject::EnemyObject() :GameObject() {
 	tag = 3;
+	enemyStateMachine = new StateMachine();
 
 	//state stuff add below
 
