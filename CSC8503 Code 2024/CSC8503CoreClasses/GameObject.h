@@ -4,6 +4,7 @@
 #include "Controller.h"
 #include "Camera.h"
 #include "Ray.h"
+#include "PhysicsObject.h"
 //#include "GameWorld.h"
 
 using std::vector;
@@ -104,6 +105,9 @@ namespace NCL::CSC8503 {
 		int GetTag() const {
 			return tag;
 		}
+		void SetTag(int t) {
+			tag = t;
+		}
 
 	protected:
 		Transform			transform;
@@ -114,7 +118,7 @@ namespace NCL::CSC8503 {
 		NetworkObject*		networkObject;
 
 		Vector3		dim;
-		int			tag; //1 player, 2 kitten, 3 enemy, 4 bonus, 5 key
+		int			tag; //1 player, 2 kitten, 3 enemy, 4 bonus, 5 key, 6 collected kitten
 
 		bool		grounded;
 		bool		isFloor;
@@ -129,14 +133,37 @@ namespace NCL::CSC8503 {
 	public:
 		PlayerObject() : GameObject() {// When called need to pass in active controller somehow
 			pYaw = 0.0f;
-			speed = 25.0f;
+			speed = 30.0f;
 			tag = 1;
+			score = 0;
+			jump = Vector3(0.0f, 15.0f, 0.0f);
 		}
 		~PlayerObject();
 		void UpdateMovement(float dt);
 
+		virtual void OnCollisionBegin(GameObject* otherObject) override {
+			this->GetPhysicsObject()->SetIsFriction(true);
+
+			if (otherObject->GetTag() == 2) {
+				otherObject->SetTag(6);
+				score += 50;
+				//if (score >= maxScore) { gameEnd = true; } // Need to add maxScore amount when determined number of kittens * 50
+			}
+			if (otherObject->GetTag() == 3) {
+				gameEnd = true;
+			}
+
+		}
+		virtual void OnCollisionEnd(GameObject* otherObject) {
+			this->GetPhysicsObject()->SetIsFriction(false);
+		}
+
 		void SetController(const Controller& c) {
 			playerController = &c;
+		}
+
+		int GetScore() {
+			return score;
 		}
 
 		typedef std::function<bool(Ray& r, RayCollision& closestCollision, bool closestObject, GameObject* ignore)> RaycastToWorld;
@@ -148,6 +175,10 @@ namespace NCL::CSC8503 {
 		Camera* playerCam;
 		float pYaw;
 		float speed;
+		int score;
+		int maxScore;
+		bool gameEnd;
+		Vector3 jump;
 
 		const Controller* playerController = nullptr;
 	};
@@ -165,7 +196,7 @@ namespace NCL::CSC8503 {
 			if (otherObject->GetTag() == 1) {
 				collected = true;
 				player = (PlayerObject*)otherObject;
-				std::cout << "yes" << "\n";
+				
 			}
 		}
 		
@@ -185,6 +216,25 @@ namespace NCL::CSC8503 {
 		bool collected;
 		bool following;
 		PlayerObject* player;
+
+	};
+
+	class EnemyObject : public GameObject {
+	public:
+		EnemyObject() :GameObject() {
+			tag = 3;
+			
+		}
+		~EnemyObject();
+
+		virtual void OnCollisionBegin(GameObject* otherObject) override {
+			if (otherObject->GetTag() == 1) {
+				//reset maybe?
+			}
+		}
+
+	protected:
+		
 
 	};
 }

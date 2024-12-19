@@ -82,7 +82,7 @@ void PlayerObject::UpdateMovement(float dt) {
 	bool noJump = false;
 	if (collision.rayDistance > 5.0f + FLT_EPSILON) { noJump = true; }
 
-	Vector3 jump = Vector3(0.0f, 12.0f, 0.0f);
+	
 	Vector3 movement = yawRotation * Vector3(0, 0, playerController->GetNamedAxis("Forward")) * speed*dt;
 	movement += yawRotation * Vector3(-playerController->GetNamedAxis("Sidestep"), 0, 0) * speed*dt;
 	if (Window::GetKeyboard()->KeyPressed(KeyCodes::SPACE) && noJump==false) {

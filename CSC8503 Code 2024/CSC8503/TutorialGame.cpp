@@ -6,7 +6,7 @@
 
 #include "PositionConstraint.h"
 #include "OrientationConstraint.h"
-#include "fc.h"
+//#include "fc.h"
 #include "StateGameObject.h"
 
 
@@ -29,6 +29,7 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 	forceMagnitude	= 10.0f;
 	useGravity		= false;
 	inSelectionMode = false;
+	gameEnded		= false;
 
 	world->GetMainCamera().SetController(controller);
 
@@ -113,13 +114,18 @@ void TutorialGame::UpdateGame(float dt) {
 	}
 
 	UpdateKeys();
+	int playerScore = world->GetPlayer()->GetScore();
+	std::string ps = std::to_string(playerScore);
+	std::string score = std::string("Score: " + ps);
 
+	Debug::Print(score , Vector2(5, 95), Debug::RED);
+	/*
 	if (useGravity) {
 		Debug::Print("(G)ravity on", Vector2(5, 95), Debug::RED);
 	}
 	else {
 		Debug::Print("(G)ravity off", Vector2(5, 95), Debug::RED);
-	}
+	}*/
 	//This year we can draw debug textures as well!
 	//Debug::DrawTex(*basicTex, Vector2(10, 10), Vector2(5, 5), Debug::MAGENTA);
 
@@ -407,6 +413,7 @@ GameObject* TutorialGame::AddPlayerToWorld(const Vector3& position) {
 
 	character->GetPhysicsObject()->SetInverseMass(inverseMass);
 	character->GetPhysicsObject()->InitSphereInertia();
+	character->GetRenderObject()->SetColour(Vector4(0, 0, 0, 1));
 
 	world->AddGameObject(character);
 	world->AddPlayerObject(character);
@@ -434,6 +441,7 @@ GameObject* TutorialGame::AddKittenToWorld(const Vector3& position) {
 
 	character->GetPhysicsObject()->SetInverseMass(inverseMass);
 	character->GetPhysicsObject()->InitSphereInertia();
+	character->GetRenderObject()->SetColour(Vector4(0, 0, 0, 1));
 
 	world->AddGameObject(character);
 	world->AddKittenObject(character);
@@ -522,6 +530,7 @@ void TutorialGame::BridgeConstraintTest() {
 
 	for (int i = 0; i < numLinks; ++i) {
 		GameObject* block = AddCubeToWorld(startPos + Vector3((i + 1) * cubeDistance, (i + 1) * cubeDistance * 0.75f, 0), cubeSize, invCubeMass);
+		block->GetPhysicsObject()->SetRestitution(0.2f);
 		PositionConstraint* constraint = new PositionConstraint(previous, block, maxDistance);
 		world->AddConstraint(constraint);
 		previous = block;
@@ -532,87 +541,89 @@ void TutorialGame::BridgeConstraintTest() {
 
 void TutorialGame::InitDefaultFloor() {
 	AddFloorToWorld(Vector3(0, -20, 0), Vector3(200, 2, 200),true);
-	AddFloorToWorld(Vector3(80, -3, 80), Vector3(80, 2, 80), true);
+	AddFloorToWorld(Vector3(75, -3, 75), Vector3(80, 2, 80), true);
 	InitMapWalls(Vector3(200, 2, 200), -20.0f);
+	AddCubeToWorld(Vector3(100,-11.3f, -22.3f), Vector3(20,2,20),0)->GetTransform().SetOrientation(Quaternion::EulerAnglesToQuaternion(25, 180, 0));
+	AddCubeToWorld(Vector3(100, -11.3f, 172.3f), Vector3(20, 2, 20), 0)->GetTransform().SetOrientation(Quaternion::EulerAnglesToQuaternion(25, 0, 0));
 }
 
 void TutorialGame::InitMaze() {
-	Vector3 wallCubeSize = Vector3(5.0f, 5.0f, 5.0f);
+	Vector3 wallCubeSize = Vector3(5.0f, 7.0f, 5.0f);
 	float worldToLocalScale = 10.0f;
 	for (int i = 0; i < 16; i++) {
 		if (i != 10) {
 			for (int j = 0; j < 16; j++) {
-				if (i == 0 || i == 15) { AddCubeToWorld(Vector3(10 * i + 5, 4, 10 * j + 5), wallCubeSize, 0); }
-				else if (j == 0 || j == 15) { AddCubeToWorld(Vector3(10 * i + 5, 4, 10 * j + 5), wallCubeSize, 0); }
+				if (i == 0 || i == 15) { AddCubeToWorld(Vector3(10 * i + 0, 6, 10 * j + 0), wallCubeSize, 0); }
+				else if (j == 0 || j == 15) { AddCubeToWorld(Vector3(10 * i + 0, 6, 10 * j + 0), wallCubeSize, 0); }
 			}
 		
 		}
 	}
-	AddCubeToWorld(Vector3(35, 4, 15), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(45, 4, 15), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(30, 6, 10), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(40, 6, 10), wallCubeSize, 0);
 	for (int i = 0; i < 7; i++) {
-		AddCubeToWorld(Vector3(65 + (i*10), 4, 25), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(60 + (i*10), 6, 20), wallCubeSize, 0);
 	}
 	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(25 + (i * 10), 4, 35), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(20 + (i * 10), 6, 30), wallCubeSize, 0);
 	}
-	AddCubeToWorld(Vector3(85, 4, 35), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(25, 4, 45), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(80, 6, 30), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(20, 6, 40), wallCubeSize, 0);
 	for (int i = 0; i < 2; i++) {
-		AddCubeToWorld(Vector3(55 + (i * 10), 4, 45), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(50 + (i * 10), 6, 40), wallCubeSize, 0);
 	}
-	AddCubeToWorld(Vector3(85, 4, 45), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(80, 6, 40), wallCubeSize, 0);
 	for (int i = 0; i < 5; i++) {
-		AddCubeToWorld(Vector3(105 + (i * 10), 4, 45), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(100 + (i * 10), 6, 40), wallCubeSize, 0);
 	}
-	AddCubeToWorld(Vector3(25, 4, 55), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(35, 4, 55), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(95, 4, 65), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(115, 4, 65), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(20, 6, 50), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(30, 6, 50), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(90, 6, 60), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(110, 6, 60), wallCubeSize, 0);
 	for (int i = 0; i < 2; i++) {
-		AddCubeToWorld(Vector3(135 + (i * 10), 4, 65), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(130 + (i * 10), 6, 60), wallCubeSize, 0);
 	}
 	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(25 + (i * 10), 4, 75), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(20 + (i * 10), 6, 70), wallCubeSize, 0);
 	}
 	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(65, 4, 75 + (i * 10)), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(60, 6, 70 + (i * 10)), wallCubeSize, 0);
 	}
 	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(85, 4, 75 + (i * 10)), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(80, 6, 70 + (i * 10)), wallCubeSize, 0);
 	}
-	AddCubeToWorld(Vector3(95, 4, 75), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(115, 4, 75), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(90, 6, 70), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(110, 6, 70), wallCubeSize, 0);
 	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(45, 4, 85 + (i * 10)), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(115 + (i * 10), 4, 85), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 2; i++) {
-		AddCubeToWorld(Vector3(15 + (i * 10), 4, 95), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(40, 6, 80 + (i * 10)), wallCubeSize, 0);
 	}
 	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(105 + (i * 10), 4, 95), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(110 + (i * 10), 6, 80), wallCubeSize, 0);
 	}
 	for (int i = 0; i < 2; i++) {
-		AddCubeToWorld(Vector3(15, 4, 105 + (i * 10)), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(10 + (i * 10), 6, 90), wallCubeSize, 0);
 	}
-	AddCubeToWorld(Vector3(145, 4, 105), wallCubeSize, 0);
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(100 + (i * 10), 6, 90), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(10, 6, 100 + (i * 10)), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(140, 6, 100), wallCubeSize, 0);
 	for (int i = 0; i < 4; i++) {
-		AddCubeToWorld(Vector3(115 + (i * 10), 4, 115), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(110 + (i * 10), 6, 110), wallCubeSize, 0);
 	}
 	for (int i = 0; i < 5; i++) {
-		AddCubeToWorld(Vector3(45 + (i * 10), 4, 125), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(40 + (i * 10), 6, 120), wallCubeSize, 0);
 	}
 	for (int i = 0; i < 2; i++) {
-		AddCubeToWorld(Vector3(25 + (i * 10), 4, 135), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(20 + (i * 10), 6, 130), wallCubeSize, 0);
 	}
 	for (int i = 0; i < 4; i++) {
-		AddCubeToWorld(Vector3(95 + (i * 10), 4, 135), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(90 + (i * 10), 6, 130), wallCubeSize, 0);
 	}
 	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(55 + (i * 10), 4, 145), wallCubeSize, 0);
+		AddCubeToWorld(Vector3(50 + (i * 10), 6, 140), wallCubeSize, 0);
 	}
 }
 

@@ -269,7 +269,11 @@ void PhysicsSystem::ImpulseResolveCollision(GameObject& a, GameObject& b, Collis
 	float angularEffect = Vector::Dot(inertiaA + inertiaB, p.normal);
 	float aRest = physA->GetRestitution();
 	float bRest = physB->GetRestitution();
-	float cRestitution = aRest * bRest;
+	float cRestitution = (aRest * bRest);
+	/*
+	if (cRestitution > 0) {
+		cRestitution = cRestitution / 2;
+	}*/
 
 	float j = (-(1.0f + cRestitution) * impulseForce) / (totalMass + angularEffect);
 	Vector3 fullImpulse = p.normal * j;
@@ -401,6 +405,10 @@ void PhysicsSystem::IntegrateVelocity(float dt) {
 		transform.SetPosition(position);
 
 		linearVel = linearVel * frameLinearDamping;
+		if (object->GetIsFriction() == true) {
+			linearVel = linearVel * object->GetFriction();
+		}
+
 		object->SetLinearVelocity(linearVel);
 		/**/
 		Quaternion orientation = transform.GetOrientation();

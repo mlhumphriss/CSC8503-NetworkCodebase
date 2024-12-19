@@ -18,6 +18,10 @@ namespace NCL {
 
 			virtual void UpdateGame(float dt);
 
+			bool GetGameEnded() {
+				return gameEnded;
+			}
+
 		protected:
 			void InitialiseAssets();
 
@@ -63,6 +67,8 @@ namespace NCL {
 
 			StateGameObject* AddStateObjectToWorld(const Vector3& position);
 			StateGameObject* testStateObject;
+
+			bool gameEnded;
 
 #ifdef USEVULKAN
 			GameTechVulkanRenderer*	renderer;

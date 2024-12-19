@@ -31,6 +31,18 @@ namespace NCL {
 				return restitution;
 			}
 
+			float GetFriction() {
+				return friction;
+			}
+
+			bool GetIsFriction() {
+				return isFriction;
+			}
+
+			void SetIsFriction(bool f) {
+				isFriction = f;
+			}
+
 			void SetInverseMass(float invMass) {
 				inverseMass = invMass;
 			}
@@ -79,6 +91,7 @@ namespace NCL {
 			float elasticity;
 			float friction;
 			float restitution;
+			bool isFriction;
 
 			//linear stuff
 			Vector3 linearVelocity;
