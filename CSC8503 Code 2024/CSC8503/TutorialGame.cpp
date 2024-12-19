@@ -6,8 +6,6 @@
 
 #include "PositionConstraint.h"
 #include "OrientationConstraint.h"
-//#include "fc.h"
-#include "StateGameObject.h"
 #include "NavigationGrid.h"
 #include "NavigationMesh.h"
 
@@ -149,10 +147,8 @@ void TutorialGame::UpdateGame(float dt) {
 		}
 	}
 
-
-
-	if (testStateObject) {
-		testStateObject->Update(dt);
+	if (world->GetEnemy()) {
+		world->GetEnemy()->Update(dt);
 	}
 
 	//Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
@@ -638,6 +634,7 @@ void TutorialGame::InitGameExamples() {
 	AddPlayerToWorld(Vector3(10, 5, -10));
 	AddKittenToWorld(Vector3(15, 5, -10));
 	AddEnemyToWorld(Vector3(50, 10, 80));
+	world->GetEnemy()->SetPlayer(world->GetPlayer());
 	//AddBonusToWorld(Vector3(10, 5, 0));
 }
 

@@ -228,6 +228,10 @@ namespace NCL::CSC8503 {
 	public:
 		EnemyObject();
 		~EnemyObject();
+		void Update(float dt);
+
+		void UpdatePathMovement();
+		void UpdateChaseMovement();
 
 		virtual void OnCollisionBegin(GameObject* otherObject) override {
 			if (otherObject->GetTag() == 1) {
@@ -243,9 +247,18 @@ namespace NCL::CSC8503 {
 			respawn = r;
 		}
 
+		PlayerObject* GetPlayer() {
+			return player;
+		}
+
+		void SetPlayer(PlayerObject* p) {
+			player = p;
+		}
+
 	protected:
 		Vector3 respawn;
 		Vector3 destination;
+		PlayerObject* player;
 
 		StateMachine* enemyStateMachine;
 	};

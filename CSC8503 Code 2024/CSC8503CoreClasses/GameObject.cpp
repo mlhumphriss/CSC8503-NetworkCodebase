@@ -107,5 +107,34 @@ EnemyObject::EnemyObject() :GameObject() {
 	enemyStateMachine = new StateMachine();
 
 	//state stuff add below
+	State* Idle = new State([&](float dt)-> void
+		{
+		
+		});
+	State* Respawn = new State([&](float dt)-> void
+		{
+			this->GetTransform().SetPosition(respawn);
+		}
+	);
 
+	enemyStateMachine->AddState(Idle);
+	enemyStateMachine->AddState(Respawn);
+
+	enemyStateMachine->AddTransition(new StateTransition(Idle, Respawn, [&]()->bool
+		{
+			return this->GetTransform().GetPosition().y < -1.0f;
+		}
+	));
+	enemyStateMachine->AddTransition(new StateTransition(Respawn, Idle, [&]()->bool
+		{
+			return this->GetTransform().GetPosition().y > -1.0f;
+		}
+	));
+
+}
+EnemyObject::~EnemyObject() {
+	delete enemyStateMachine;
+}
+void EnemyObject::Update(float dt) {
+	enemyStateMachine->Update(dt);
 }
