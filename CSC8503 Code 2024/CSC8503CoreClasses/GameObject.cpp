@@ -104,7 +104,7 @@ bool PlayerObject::InMaze() {
 
 EnemyObject::EnemyObject() :GameObject() {
 	tag = 3;
-	speed = 30.0f;
+	speed = 2.0f;
 	enemyStateMachine = new StateMachine();
 
 	//state stuff add below
@@ -189,6 +189,8 @@ void EnemyObject::UpdateChaseMovement(float dt) {
 	Vector3 direction = player->GetTransform().GetPosition() - this->GetTransform().GetPosition();
 	this->GetRenderObject()->SetColour(Vector4(1, 0, 0, 1));
 	
+	Vector3 movement = Vector3(direction.x, -1.0f, direction.z) * speed * dt;
+	this->GetPhysicsObject()->ApplyLinearImpulse(movement);
 	/*
 	Quaternion Orientation = Quaternion::Quaternion(direction, 0.0f);
 	Orientation.CalculateW();
