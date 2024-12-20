@@ -26,9 +26,11 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 	physics		= new PhysicsSystem(*world);
 
 	forceMagnitude	= 10.0f;
-	useGravity		= false;
+	useGravity		= true;
 	inSelectionMode = false;
 	gameEnded		= false;
+	devMode			= true;
+	physics->UseGravity(useGravity);
 
 	world->GetMainCamera().SetController(controller);
 
@@ -98,7 +100,7 @@ void TutorialGame::UpdateGame(float dt) {
 		Vector3 objPos = lockedObject->GetTransform().GetPosition();
 		Vector3 camPos = objPos + lockedOffset;
 
-		Matrix4 temp = Matrix::View(camPos, objPos, Vector3(0,1,0));
+		Matrix4 temp = Matrix::View(camPos, objPos, Vector3(0, 1, 0));
 
 		Matrix4 modelMat = Matrix::Inverse(temp);
 
@@ -113,7 +115,7 @@ void TutorialGame::UpdateGame(float dt) {
 	if (world->GetPlayer()->GetGameEnd()) {
 		if (world->GetPlayer()->GetScore() >= world->GetPlayer()->GetMaxScore() && gameEnded == false) {
 			gameWon = true;
-			Debug::Print("YOU WON !", Vector2(20,50), Debug::GREEN);
+			Debug::Print("YOU WON !", Vector2(20, 50), Debug::GREEN);
 			gameEnded = true;
 		}
 		else {
@@ -128,14 +130,19 @@ void TutorialGame::UpdateGame(float dt) {
 	std::string ps = std::to_string(playerScore);
 	std::string score = std::string("Score: " + ps);
 
-	Debug::Print(score , Vector2(5, 95), Debug::RED);
-	/*
-	if (useGravity) {
-		Debug::Print("(G)ravity on", Vector2(5, 95), Debug::RED);
+	Debug::Print(score, Vector2(5, 95), Debug::RED);
+
+	if (devMode) {
+		Debug::Print("Dev Mode", Vector2(80, 90), Debug::BLUE);
+
+		if (useGravity) {
+			Debug::Print("(G)ravity on", Vector2(5, 15), Debug::RED);
+		}
+		else {
+			Debug::Print("(G)ravity off", Vector2(5, 15), Debug::RED);
+		}
 	}
-	else {
-		Debug::Print("(G)ravity off", Vector2(5, 95), Debug::RED);
-	}*/
+
 	//This year we can draw debug textures as well!
 	//Debug::DrawTex(*basicTex, Vector2(10, 10), Vector2(5, 5), Debug::MAGENTA);
 
@@ -167,10 +174,12 @@ void TutorialGame::UpdateGame(float dt) {
 	if (testStateObject) { testStateObject->Update(dt); }
 
 	//Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
-	
 
-	SelectObject();
-	MoveSelectedObject();
+	if (devMode) {
+		SelectObject();
+		MoveSelectedObject();
+	}
+
 	AddKittenConstraints();
 
 	world->UpdateWorld(dt);
@@ -191,7 +200,7 @@ void TutorialGame::UpdateKeys() {
 		InitCamera(); //F2 will reset the camera to a specific default place
 	}
 
-	if (Window::GetKeyboard()->KeyPressed(KeyCodes::G)) {
+	if (Window::GetKeyboard()->KeyPressed(KeyCodes::G) && devMode == true) {
 		useGravity = !useGravity; //Toggle gravity!
 		physics->UseGravity(useGravity);
 	}
@@ -748,7 +757,7 @@ bool TutorialGame::SelectObject() {
 		}
 	}
 	if (inSelectionMode) {
-		//Debug::Print("Press Q to change to camera mode!", Vector2(5, 85));
+		Debug::Print("Press Q to change to camera mode!", Vector2(35, 15));
 
 		if (Window::GetMouse()->ButtonDown(NCL::MouseButtons::Left)) {
 			if (selectionObject) {	//set colour to deselected;
@@ -781,7 +790,7 @@ bool TutorialGame::SelectObject() {
 		}
 	}
 	else {
-		//Debug::Print("Press Q to change to select mode!", Vector2(5, 85));
+		Debug::Print("Press Q to change to select mode!", Vector2(35, 15));
 	}
 	return false;
 }
@@ -794,6 +803,8 @@ line - after the third, they'll be able to twist under torque aswell.
 */
 
 void TutorialGame::MoveSelectedObject() {
+
+	Debug::Print("Click Force:" + std::to_string(forceMagnitude), Vector2(55, 20));
 	forceMagnitude += Window::GetMouse()->GetWheelMovement() * 100.0f;
 
 	if (!selectionObject) {

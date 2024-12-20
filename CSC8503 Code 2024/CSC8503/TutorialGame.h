@@ -71,6 +71,7 @@ namespace NCL {
 
 			bool gameEnded;
 			bool gameWon;
+			bool devMode;
 
 #ifdef USEVULKAN
 			GameTechVulkanRenderer*	renderer;
