@@ -132,10 +132,9 @@ EnemyObject::EnemyObject() :GameObject() {
 		{
 			this->CreatePath();
 			if (!routeDisrupted) { this->UpdatePathMovement(dt); }
-			DisplayPathfinding();
+			//DisplayPathfinding();
 		}
 	);
-
 
 	enemyStateMachine->AddState(Idle);
 	enemyStateMachine->AddState(Respawn);

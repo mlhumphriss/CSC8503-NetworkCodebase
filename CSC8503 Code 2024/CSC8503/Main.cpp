@@ -147,10 +147,6 @@ void TestNetworking() {
 	NetworkBase::Destroy();
 }
 
-
-
-
-
 vector<Vector3> testNodes;
 void TestPathfinding() {
 	NavigationGrid grid("TestGrid2.txt");
@@ -373,8 +369,8 @@ int main() {
 
 		
 		//TestStateMachine();
-		TestPathfinding();
-		DisplayPathfinding();
+		//TestPathfinding();
+		//DisplayPathfinding();
 
 		g->UpdateGame(dt);
 	}
