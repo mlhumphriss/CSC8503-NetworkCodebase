@@ -22,6 +22,14 @@ namespace NCL {
 				return gameEnded;
 			}
 
+			bool GetDevMode() {
+				return devMode;
+			}
+
+			void SetDevMode(bool d) {
+				devMode = d;
+			}
+
 		protected:
 			void InitialiseAssets();
 
@@ -44,6 +52,7 @@ namespace NCL {
 			void InitMapWalls(const Vector3 mapDims, float mapHeight);
 			void AddDoor(Vector3 startPos);
 			
+			void PauseMenu();
 
 			void InitDefaultFloor();
 			void InitMaze();
@@ -74,6 +83,7 @@ namespace NCL {
 			bool gameEnded;
 			bool gameWon;
 			bool devMode;
+			bool paused;
 
 #ifdef USEVULKAN
 			GameTechVulkanRenderer*	renderer;

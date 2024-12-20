@@ -31,7 +31,7 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 	useGravity		= true;
 	inSelectionMode = false;
 	gameEnded		= false;
-	devMode			= true;
+	devMode			= false;
 	physics->UseGravity(useGravity);
 
 	world->GetMainCamera().SetController(controller);
@@ -48,6 +48,25 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 
 	world->GetPlayer()->SetController(controller); 
 
+	paused = true;
+}
+
+void TutorialGame::PauseMenu() {
+	bool check = true;
+	while (check = true) {
+	Debug::Print("Press N to Play in Normal Mode", Vector2(40, 40), Debug::RED);
+	Debug::Print("Press S to Play in Sandbox Mode", Vector2(40, 60), Debug::RED);
+	if (Window::GetKeyboard()->KeyDown(KeyCodes::N)) {
+		devMode = false;
+		check = false;
+	}
+	if (Window::GetKeyboard()->KeyDown(KeyCodes::S)) {
+		devMode = true;
+		check = false;
+	}
+	}
+	if (check = false) { paused = false; }
+	return;
 }
 
 /*
@@ -164,8 +183,19 @@ void TutorialGame::UpdateGame(float dt) {
 	Debug::UpdateRenderables(dt);
 	
 	//machine.Update(dt);
-
-
+	if (devMode == false) {
+		Debug::Print("Press M to Play in Sandbox Mode", Vector2(5, 5), Debug::RED);
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::M)) {
+			devMode = true;
+		}
+	}
+	else {
+		Debug::Print("Press N to Play in Normal Mode", Vector2(5, 5), Debug::RED);
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::N)) {
+			devMode = false;
+		}
+	}
+	
 	if (!inSelectionMode) {
 		world->SetSelectMode(false);
 	}
@@ -259,6 +289,10 @@ void TutorialGame::UpdateGame(float dt) {
 	world->UpdateWorld(dt);
 	physics->Update(dt, world);
 
+	/*
+	if (paused = true) {
+		PauseMenu();
+	}*/
 	/*
 	renderer->Update(dt);
 	renderer->Render();

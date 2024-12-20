@@ -331,22 +331,50 @@ int main() {
 	//TestNetworking();
 	//TestBehaviourTree();
 	WindowInitialisation initInfo;
-	initInfo.width		= 1280;
-	initInfo.height		= 720;
+	initInfo.width = 1280;
+	initInfo.height = 720;
 	initInfo.windowTitle = "CSC8503 Game technology!";
 
-	Window*w = Window::CreateGameWindow(initInfo);
+	Window* w = Window::CreateGameWindow(initInfo);
 
 	if (!w->HasInitialised()) {
 		return -1;
-	}	
+	}
 
 	//TestPushdownAutomata(w);
+	/*
+	int select;
+
+	bool check = false;
+
+	std::cout << "Press 1 for Normal Mode" << std::endl;
+	std::cout << "Press 2 for Sandbox Mode" << std::endl;
+	cin >> select;
+	*/
 
 	w->ShowOSPointer(false);
 	w->LockMouseToWindow(true);
 
+
+
 	TutorialGame* g = new TutorialGame();
+	/*
+	while (check = false) {
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::N)) {
+			g->SetDevMode(false);
+			check = true;
+		}
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::S)) {
+			g->SetDevMode(true);
+			check = true;
+		}
+	}*/
+	/*
+	if (select == 2) {
+		g->SetDevMode(true);
+	}
+	else { g->SetDevMode(false); }*/
+
 	w->GetTimer().GetTimeDeltaSeconds(); //Clear the timer so we don't get a larget first dt!
 	while (w->UpdateWindow() && !Window::GetKeyboard()->KeyDown(KeyCodes::ESCAPE)) {
 		float dt = w->GetTimer().GetTimeDeltaSeconds();
