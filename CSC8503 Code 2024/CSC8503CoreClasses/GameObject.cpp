@@ -87,6 +87,7 @@ void PlayerObject::UpdateMovement(float dt) {
 	if (collision.rayDistance > 5.0f + FLT_EPSILON) { noJump = true; }
 
 	canChase = InMaze();
+	//std::cout << canChase << std::endl;
 	
 	Vector3 movement = yawRotation * Vector3(0, 0, playerController->GetNamedAxis("Forward")) * speed*dt;
 	movement += yawRotation * Vector3(-playerController->GetNamedAxis("Sidestep"), 0, 0) * speed*dt;
@@ -98,7 +99,7 @@ void PlayerObject::UpdateMovement(float dt) {
 
 bool PlayerObject::InMaze() {
 	Vector3 currentPos = this->GetTransform().GetPosition();
-	if ((currentPos.x >= 10 || currentPos.x <= 150) && (currentPos.z >= 10 || currentPos.z <= 150) && (currentPos.y > -5)) { return true; }
+	if ((currentPos.x >= 0 && currentPos.x <= 150) && (currentPos.z >= 0 && currentPos.z <= 150) && (currentPos.y > -5)) { return true; }
 	return false;
 }
 
@@ -131,6 +132,7 @@ EnemyObject::EnemyObject() :GameObject() {
 		{
 			this->CreatePath();
 			if (!routeDisrupted) { this->UpdatePathMovement(dt); }
+			DisplayPathfinding();
 		}
 	);
 
@@ -224,12 +226,16 @@ void EnemyObject::UpdateChaseMovement(float dt) {
 void EnemyObject::UpdatePathMovement(float dt) {
 	this->GetRenderObject()->SetColour(Vector4(1.0f, 0.5f, 0.0f, 1.0f));
 	Vector3 nextNode = pathNodes[routePoint];
-	if (Vector::Length(this->GetTransform().GetPosition() - nextNode ) < 1.0f) {
+
+	std::cout << "D" << "\n";
+	if (Vector::Length(this->GetTransform().GetPosition() - nextNode ) < 2.0f) {
 		if (routePoint != pathNodes.size()) {
 			routePoint++;
 			nextNode = pathNodes[routePoint];
+			std::cout << "E" << "\n";
 		}
-		else { routeDisrupted = true; }
+		else { routeDisrupted = true; std::cout << "E" << "\n";
+		}
 	}
 	Vector3 direction = nextNode - this->GetTransform().GetPosition();
 	Vector3 movement = Vector3(direction.x, -1.0f, direction.z) * speed * dt;
@@ -240,11 +246,11 @@ void EnemyObject::CreatePath() {
 	if (CheckNewPathNeeded() == false) { return; }
 	NavigationGrid grid("TestGrid2.txt");
 	NavigationPath outPath;
-	
+	std::cout << "B" << "\n";
 	destination = player->GetTransform().GetPosition();
 	bool found = grid.FindPath(this->GetTransform().GetPosition(), destination, outPath);
 
-	if (!found) { routeDisrupted = true; return; }
+	if (!found) { routeDisrupted = true; std::cout << "C" << "\n"; return; }
 
 	routePoint = 0;
 	pathNodes.clear();
@@ -256,6 +262,7 @@ void EnemyObject::CreatePath() {
 
 bool EnemyObject::CheckNewPathNeeded() {
 	if (Vector::Length(player->GetTransform().GetPosition() - destination) > 30.0f || routeDisrupted==true) {
+		std::cout << "A" << "\n";
 		routeDisrupted = false;
 		return true;
 	}

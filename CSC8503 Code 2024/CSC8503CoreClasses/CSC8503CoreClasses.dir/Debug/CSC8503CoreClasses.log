@@ -1,21 +1,5 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (CSC8503CoreClasses.dir\Debug\) contains files shared from another project (CSC8503CoreClasses.vcxproj, CSC8503CoreClasses.vcxproj, CSC8503CoreClasses.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  GameObject.h
-  GameWorld.h
   GameObject.cpp
-  GameWorld.cpp
-  CollisionDetection.h
-  CollisionDetection.cpp
-  QuadTree.h
-  QuadTree.cpp
-  GameServer.cpp
-  NetworkObject.h
-  NetworkObject.cpp
-  PositionConstraint.cpp
-  OrientationConstraint.cpp
-  PhysicsObject.cpp
-  PhysicsSystem.cpp
-  PhysicsSystem.h
-  fc.cpp
 fc.obj : warning LNK4006: "public: __cdecl NCL::CSC8503::FollowConstraint::FollowConstraint(class NCL::CSC8503::GameObject *,class NCL::CSC8503::GameObject *,float)" (??0FollowConstraint@CSC8503@NCL@@QEAA@PEAVGameObject@12@0M@Z) already defined in PositionConstraint.cpp.obj; second definition ignored
 fc.obj : warning LNK4006: "public: virtual __cdecl NCL::CSC8503::FollowConstraint::~FollowConstraint(void)" (??1FollowConstraint@CSC8503@NCL@@UEAA@XZ) already defined in PositionConstraint.cpp.obj; second definition ignored
 fc.obj : warning LNK4006: "public: virtual void __cdecl NCL::CSC8503::FollowConstraint::UpdateConstraint(float)" (?UpdateConstraint@FollowConstraint@CSC8503@NCL@@UEAAXM@Z) already defined in PositionConstraint.cpp.obj; second definition ignored
