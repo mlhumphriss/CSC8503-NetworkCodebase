@@ -42,6 +42,7 @@ namespace NCL {
 			void InitCubeGridWorld(Vector3 startPos, int numRows, int numCols, int layers, float rowSpacing, float colSpacing, float laySpacing, const Vector3& cubeDims);
 			void InitTable(const Vector3 tablePos);
 			void InitMapWalls(const Vector3 mapDims, float mapHeight);
+			void AddDoor(Vector3 startPos);
 			
 
 			void InitDefaultFloor();
@@ -60,6 +61,7 @@ namespace NCL {
 			GameObject* AddFloorToWorld(const Vector3& position, Vector3 floorSize, bool obb);
 			GameObject* AddSphereToWorld(const Vector3& position, float radius, float inverseMass = 10.0f);
 			GameObject* AddCubeToWorld(const Vector3& position, Vector3 dimensions, float inverseMass = 10.0f);
+			GameObject* AddAABBCubeToWorld(const Vector3& position, Vector3 dimensions, float inverseMass = 10.0f);
 
 			GameObject* AddPlayerToWorld(const Vector3& position);
 			GameObject* AddEnemyToWorld(const Vector3& position);

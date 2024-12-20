@@ -9,6 +9,8 @@
 #include "NavigationGrid.h"
 #include "NavigationMesh.h"
 
+#include "PushdownMachine.h"
+#include "PushdownState.h"
 
 using namespace NCL;
 using namespace CSC8503;
@@ -45,8 +47,73 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 	InitialiseAssets();
 
 	world->GetPlayer()->SetController(controller); 
+
 }
 
+/*
+class PauseScreen : public PushdownState {
+	PushdownResult OnUpdate(float dt, PushdownState** newState)override {
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::U)) {
+			return PushdownResult::Pop;
+		}
+		return PushdownResult::NoChange;
+	}
+	void OnAwake() override {
+		Debug::Print("U to unpause", Vector2(5, 65), Debug::RED);
+	}
+};
+class GameScreen : public PushdownState {
+	PushdownResult OnUpdate(float dt, PushdownState** newState)override {
+		paused = false;
+
+		if (Window::GetKeyboard()->KeyDown(KeyCodes::P)) {
+			*newState = new PauseScreen();
+			paused = true;
+			return PushdownResult::Push;
+		}
+		return PushdownResult::NoChange;
+	};
+	void OnAwake() override {
+		Debug::Print("P to pause", Vector2(5, 65), Debug::RED);
+	}
+protected:
+	bool paused;
+};
+class IntroScreen : public PushdownState {
+	PushdownResult OnUpdate(float dt, PushdownState** newState) override {
+		if (Window::GetKeyboard()->KeyDown(KeyCodes::N)) {
+			*newState = new GameScreen();
+			dev = false;
+			return PushdownResult::Push;
+		}
+		if (Window::GetKeyboard()->KeyDown(KeyCodes::S)) {
+			*newState = new GameScreen();
+			dev = true;
+			return PushdownResult::Push;
+		}
+		return PushdownResult::NoChange;
+
+	};
+	void OnAwake() override {
+		Debug::Print("Press N to Play in Normal Mode", Vector2(40, 40), Debug::RED);
+		Debug::Print("Press S to Play in Sandbox Mode", Vector2(40, 60), Debug::RED);
+	}
+protected:
+	bool dev;
+};
+
+
+
+
+void TestPushdownAutomata(float dt, bool gameEnded) {
+	PushdownMachine machine(new IntroScreen());
+	while (gameEnded == false) {
+		if (!machine.Update(dt)) {
+			return;
+		}
+	}
+}
+*/
 /*
 
 Each of the little demo scenarios used in the game uses the same 2 meshes, 
@@ -92,6 +159,13 @@ TutorialGame::~TutorialGame()	{
 }
 
 void TutorialGame::UpdateGame(float dt) {
+	renderer->Update(dt);
+	renderer->Render();
+	Debug::UpdateRenderables(dt);
+	
+	//machine.Update(dt);
+
+
 	if (!inSelectionMode) {
 		world->SetSelectMode(false);
 	}
@@ -183,11 +257,12 @@ void TutorialGame::UpdateGame(float dt) {
 	AddKittenConstraints();
 
 	world->UpdateWorld(dt);
-	renderer->Update(dt);
 	physics->Update(dt, world);
 
+	/*
+	renderer->Update(dt);
 	renderer->Render();
-	Debug::UpdateRenderables(dt);
+	Debug::UpdateRenderables(dt);*/
 }
 
 void TutorialGame::UpdateKeys() {
@@ -315,6 +390,7 @@ void TutorialGame::InitWorld() {
 	InitMaze();
 	InitSphereGridWorld(Vector3(-190, -16, -190), 9,9,10.0f,10.0f,5.0f);
 	InitCubeGridWorld(Vector3(-49, -15, 51), 5, 2, 3, 3.0f, 3.0f, 2.2f, Vector3(1, 1, 1));
+	AddDoor(Vector3(110, -10, 20));
 
 	testStateObject = AddStateObjectToWorld(Vector3(0, -10, 0));
 }
@@ -572,6 +648,32 @@ void TutorialGame::BridgeConstraintTest() {
 	PositionConstraint* constraint = new PositionConstraint(previous, end, maxDistance);
 	world->AddConstraint(constraint);
 }
+
+void TutorialGame::AddDoor(Vector3 startPos) {
+	Vector3 sideSizes = Vector3(1, 3, 1);
+	Vector3 doorSizes = Vector3(3, 2, 1);
+
+	GameObject* postLeft = AddCubeToWorld(startPos, sideSizes, 0);
+	GameObject* doorLeft = AddCubeToWorld(startPos + Vector3(6, 0, 0), doorSizes);
+	HingeConstraint* postConstraint1 = new HingeConstraint(postLeft, doorLeft);
+	PositionConstraint* positionConstraint1 = new PositionConstraint(postLeft, doorLeft, 5);
+
+	GameObject* postRight = AddCubeToWorld(startPos + Vector3(16, 0, 0), sideSizes, 0);
+	GameObject* doorRight = AddCubeToWorld(startPos + Vector3(10.5f, 0, 0), doorSizes);
+	HingeConstraint* postConstraint2 = new HingeConstraint(postRight, doorRight);
+	PositionConstraint* positionConstraint2 = new PositionConstraint(postRight, doorRight, 5);
+
+	postLeft->GetRenderObject()->SetColour(Vector4(0, 0, 1, 1));
+	doorLeft->GetRenderObject()->SetColour(Vector4(0, 0, 1, 1));
+	postRight->GetRenderObject()->SetColour(Vector4(0, 0, 1, 1));
+	doorRight->GetRenderObject()->SetColour(Vector4(0, 0, 1, 1));
+
+	world->AddConstraint(postConstraint1);
+	world->AddConstraint(postConstraint2);
+	world->AddConstraint(positionConstraint1);
+	world->AddConstraint(positionConstraint2);
+}
+
 
 void TutorialGame::InitDefaultFloor() {
 	AddFloorToWorld(Vector3(0, -20, 0), Vector3(200, 2, 200),true);
