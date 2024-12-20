@@ -37,9 +37,9 @@ namespace NCL {
 			*/
 			void InitGameExamples();
 
-			void InitSphereGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing, float radius);
+			void InitSphereGridWorld(Vector3 startPos,int numRows, int numCols, float rowSpacing, float colSpacing, float radius);
 			void InitMixedGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing);
-			void InitCubeGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing, const Vector3& cubeDims);
+			void InitCubeGridWorld(Vector3 startPos, int numRows, int numCols, int layers, float rowSpacing, float colSpacing, float laySpacing, const Vector3& cubeDims);
 			void InitTable(const Vector3 tablePos);
 			void InitMapWalls(const Vector3 mapDims, float mapHeight);
 			
@@ -63,13 +63,14 @@ namespace NCL {
 
 			GameObject* AddPlayerToWorld(const Vector3& position);
 			GameObject* AddEnemyToWorld(const Vector3& position);
-			GameObject* AddBonusToWorld(const Vector3& position);
+			GameObject* AddBonusToWorld(const Vector3& position, int tag);
 			GameObject* AddKittenToWorld(const Vector3& position);
 
 			StateGameObject* AddStateObjectToWorld(const Vector3& position);
 			StateGameObject* testStateObject;
 
 			bool gameEnded;
+			bool gameWon;
 
 #ifdef USEVULKAN
 			GameTechVulkanRenderer*	renderer;

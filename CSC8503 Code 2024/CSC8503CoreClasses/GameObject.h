@@ -123,7 +123,7 @@ namespace NCL::CSC8503 {
 		NetworkObject*		networkObject;
 
 		Vector3		dim;
-		int			tag; //1 player, 2 kitten, 3 enemy, 4 bonus, 5 key, 6 collected kitten
+		int			tag; //1 player, 2 kitten, 3 enemy, 4 JumpBonus, 5 key, 6 collected kitten, 7 SpeedBonus
 
 		bool		grounded;
 		bool		isFloor;
@@ -141,6 +141,7 @@ namespace NCL::CSC8503 {
 			speed = 30.0f;
 			tag = 1;
 			score = 0;
+			maxScore = 250;
 			jump = Vector3(0.0f, 15.0f, 0.0f);
 		}
 		~PlayerObject();
@@ -153,11 +154,19 @@ namespace NCL::CSC8503 {
 
 			if (otherObject->GetTag() == 2) {
 				otherObject->SetTag(6);
-				score += 50;
-				//if (score >= maxScore) { gameEnd = true; } // Need to add maxScore amount when determined number of kittens * 50
+				if (!gameEnd) {
+					score += 50;
+					if (score >= maxScore) { gameEnd = true; }
+				}
 			}
 			if (otherObject->GetTag() == 3) {
 				gameEnd = true;
+			}
+			if (otherObject->GetTag() == 4) {
+				jump.y = 25.0f;
+			}
+			if (otherObject->GetTag() == 7) {
+				speed = 50.0f;
 			}
 
 		}
@@ -173,8 +182,16 @@ namespace NCL::CSC8503 {
 			return score;
 		}
 
+		int GetMaxScore() {
+			return maxScore;
+		}
+
 		bool GetChase() {
 			return canChase;
+		}
+
+		bool GetGameEnd() {
+			return gameEnd;
 		}
 
 		/*
@@ -283,21 +300,4 @@ namespace NCL::CSC8503 {
 		StateMachine* enemyStateMachine;
 	};
 }
-/* Enemy movement plan
-State 1:If cat in maze, gets position, pathfinds to it, moves along route till gets to end, repeats
-
-State 2: if within x of cat, chases it
-
-State 3: If cat not in maze, return to respawn
-
-State 4: If under maze, set position to respawn
-
-State 5: if x,z at respawn, sit idle   INITIAL STATE
-
-Behaviour Tree:
-	Check if player in maze: success move towards player, failure move towards respawn
-
-	Move towards player position:
-
-*/
 

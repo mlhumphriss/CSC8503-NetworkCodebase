@@ -110,6 +110,19 @@ void TutorialGame::UpdateGame(float dt) {
 		world->GetMainCamera().SetYaw(angles.y);
 	}
 
+	if (world->GetPlayer()->GetGameEnd()) {
+		if (world->GetPlayer()->GetScore() >= world->GetPlayer()->GetMaxScore() && gameEnded == false) {
+			gameWon = true;
+			Debug::Print("YOU WON !", Vector2(20,50), Debug::GREEN);
+			gameEnded = true;
+		}
+		else {
+			gameWon = false;
+			Debug::Print("YOU LOST !", Vector2(20, 50), Debug::RED);
+			gameEnded = true;
+		}
+	}
+
 	UpdateKeys();
 	int playerScore = world->GetPlayer()->GetScore();
 	std::string ps = std::to_string(playerScore);
@@ -150,6 +163,8 @@ void TutorialGame::UpdateGame(float dt) {
 	if (world->GetEnemy()) {
 		world->GetEnemy()->Update(dt);
 	}
+
+	if (testStateObject) { testStateObject->Update(dt); }
 
 	//Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
 	
@@ -284,13 +299,15 @@ void TutorialGame::InitWorld() {
 	world->ClearAndErase();
 	physics->Clear();
 
-	//InitMixedGridWorld(15, 15, 3.5f, 3.5f);
 	BridgeConstraintTest();
-	InitTable(Vector3(-30,-18,20));
+	InitTable(Vector3(-50,-18,50));
 	InitGameExamples();
 	InitDefaultFloor();
 	InitMaze();
-	//testStateObject = AddStateObjectToWorld(Vector3(0, 10, 0));
+	InitSphereGridWorld(Vector3(-190, -16, -190), 9,9,10.0f,10.0f,5.0f);
+	InitCubeGridWorld(Vector3(-49, -15, 51), 5, 2, 3, 3.0f, 3.0f, 2.2f, Vector3(1, 1, 1));
+
+	testStateObject = AddStateObjectToWorld(Vector3(0, -10, 0));
 }
 /**/
 void TutorialGame::AddKittenConstraints() {
@@ -475,7 +492,7 @@ GameObject* TutorialGame::AddEnemyToWorld(const Vector3& position) {
 	return character;
 }
 
-GameObject* TutorialGame::AddBonusToWorld(const Vector3& position) {
+GameObject* TutorialGame::AddBonusToWorld(const Vector3& position, int tag) {
 	GameObject* apple = new GameObject();
 
 	SphereVolume* volume = new SphereVolume(0.5f);
@@ -489,8 +506,11 @@ GameObject* TutorialGame::AddBonusToWorld(const Vector3& position) {
 
 	apple->GetPhysicsObject()->SetInverseMass(1.0f);
 	apple->GetPhysicsObject()->InitSphereInertia();
-	apple->GetRenderObject()->SetColour(Vector4(0, 0, 1, 1));
+	apple->SetTag(tag);
 
+	if (tag == 4) { apple->GetRenderObject()->SetColour(Vector4(0, 0, 1, 1)); }
+	if (tag == 7) { apple->GetRenderObject()->SetColour(Vector4(0, 1, 1, 1)); }
+	
 	world->AddGameObject(apple);
 
 	return apple;
@@ -499,17 +519,19 @@ GameObject* TutorialGame::AddBonusToWorld(const Vector3& position) {
 StateGameObject* TutorialGame::AddStateObjectToWorld(const Vector3& position) {
 	StateGameObject* apple = new StateGameObject();
 
-	SphereVolume* volume = new SphereVolume(0.5f);
+	SphereVolume* volume = new SphereVolume(2.0f);
 	apple->SetBoundingVolume((CollisionVolume*)volume);
 	apple->GetTransform()
 		.SetScale(Vector3(2, 2, 2))
 		.SetPosition(position);
 
-	apple->SetRenderObject(new RenderObject(&apple->GetTransform(), bonusMesh, nullptr, basicShader));
+	apple->SetRenderObject(new RenderObject(&apple->GetTransform(), enemyMesh, nullptr, basicShader));
 	apple->SetPhysicsObject(new PhysicsObject(&apple->GetTransform(), apple->GetBoundingVolume()));
 
 	apple->GetPhysicsObject()->SetInverseMass(1.0f);
 	apple->GetPhysicsObject()->InitSphereInertia();
+	apple->SetTag(3);
+	apple->GetRenderObject()->SetColour(Vector4(1, 0, 0, 1));
 
 	world->AddGameObject(apple);
 
@@ -548,6 +570,9 @@ void TutorialGame::InitDefaultFloor() {
 	InitMapWalls(Vector3(200, 2, 200), -20.0f);
 	AddCubeToWorld(Vector3(100,-11.3f, -17.3f), Vector3(20,2,20),0)->GetTransform().SetOrientation(Quaternion::EulerAnglesToQuaternion(25, 180, 0));
 	AddCubeToWorld(Vector3(100, -11.3f, 177.3f), Vector3(20, 2, 20), 0)->GetTransform().SetOrientation(Quaternion::EulerAnglesToQuaternion(25, 0, 0));
+
+	AddCubeToWorld(Vector3(-150, -16.0f, -100.0f), Vector3(50, 2, 2), 0);
+	AddCubeToWorld(Vector3(-98, -16.0f, -148.0f), Vector3(2, 2, 50), 0);
 }
 
 void TutorialGame::InitMaze() {
@@ -630,111 +655,32 @@ void TutorialGame::InitMaze() {
 	}
 }
 
-void TutorialGame::InitMaze2() {
-	Vector3 wallCubeSize = Vector3(2.5f, 7.0f, 2.5f);
-	float worldToLocalScale = 5.0f;
-	for (int i = 0; i < 32; i++) {
-		if (i != 20 || i != 21 ) {
-			for (int j = 0; j < 32; j++) {
-				if (i == 0  || i == 31) { AddCubeToWorld(Vector3(worldToLocalScale * i + 5, 6, worldToLocalScale * j + 5), wallCubeSize, 0); }
-				else if (j == 0 || j == 31) { AddCubeToWorld(Vector3(worldToLocalScale * i + 5, 6, worldToLocalScale * j + 5), wallCubeSize, 0); }
-			}
-
-		}
-	}
-	AddCubeToWorld(Vector3(35, 6, 15), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(45, 6, 15), wallCubeSize, 0);
-	for (int i = 0; i < 7; i++) {
-		AddCubeToWorld(Vector3(65 + (i * worldToLocalScale), 6, 25), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(25 + (i * worldToLocalScale), 6, 35), wallCubeSize, 0);
-	}
-	AddCubeToWorld(Vector3(85, 6, 35), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(25, 6, 45), wallCubeSize, 0);
-	for (int i = 0; i < 2; i++) {
-		AddCubeToWorld(Vector3(55 + (i * worldToLocalScale), 6, 45), wallCubeSize, 0);
-	}
-	AddCubeToWorld(Vector3(85, 6, 45), wallCubeSize, 0);
-	for (int i = 0; i < 5; i++) {
-		AddCubeToWorld(Vector3(105 + (i * worldToLocalScale), 6, 45), wallCubeSize, 0);
-	}
-	AddCubeToWorld(Vector3(25, 6, 55), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(45, 6, 55), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(95, 6, 65), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(115, 6, 65), wallCubeSize, 0);
-	for (int i = 0; i < 2; i++) {
-		AddCubeToWorld(Vector3(135 + (i * worldToLocalScale), 6, 65), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(25 + (i * worldToLocalScale), 6, 75), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(65, 6, 75 + (i * worldToLocalScale)), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(85, 6, 75 + (i * worldToLocalScale)), wallCubeSize, 0);
-	}
-	AddCubeToWorld(Vector3(95, 6, 75), wallCubeSize, 0);
-	AddCubeToWorld(Vector3(115, 6, 75), wallCubeSize, 0);
-	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(45, 6, 85 + (i * worldToLocalScale)), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(115 + (i * worldToLocalScale), 6, 85), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 2; i++) {
-		AddCubeToWorld(Vector3(15 + (i * worldToLocalScale), 6, 95), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(105 + (i * worldToLocalScale), 6, 95), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 2; i++) {
-		AddCubeToWorld(Vector3(25, 6, 105 + (i * worldToLocalScale)), wallCubeSize, 0);
-	}
-	AddCubeToWorld(Vector3(145, 6, 105), wallCubeSize, 0);
-	for (int i = 0; i < 4; i++) {
-		AddCubeToWorld(Vector3(115 + (i * worldToLocalScale), 6, 115), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 5; i++) {
-		AddCubeToWorld(Vector3(45 + (i * worldToLocalScale), 6, 125), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 2; i++) {
-		AddCubeToWorld(Vector3(25 + (i * worldToLocalScale), 6, 135), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 4; i++) {
-		AddCubeToWorld(Vector3(95 + (i * worldToLocalScale), 6, 135), wallCubeSize, 0);
-	}
-	for (int i = 0; i < 3; i++) {
-		AddCubeToWorld(Vector3(55 + (i * worldToLocalScale), 6, 145), wallCubeSize, 0);
-	}
-}
-
-
 
 void TutorialGame::InitGameExamples() {
 	AddPlayerToWorld(Vector3(10, 5, -10));
-	AddKittenToWorld(Vector3(15, 5, -10));
+	AddKittenToWorld(Vector3(-160, -16, -170));
+	AddKittenToWorld(Vector3(-170, -16, -190));
+	AddKittenToWorld(Vector3(-47, -16, 55));
+	AddKittenToWorld(Vector3(125, 63, -30));
+	AddKittenToWorld(Vector3(75, 2, 85));
 	AddEnemyToWorld(Vector3(55, 10, 85));
 	world->GetEnemy()->SetPlayer(world->GetPlayer());
-	//AddBonusToWorld(Vector3(10, 5, 0));
+	AddBonusToWorld(Vector3(15, 8, 105), (int) 4);
+	AddBonusToWorld(Vector3(-175, -16, -175), (int) 7);
 }
 
-void TutorialGame::InitSphereGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing, float radius) {
+void TutorialGame::InitSphereGridWorld(Vector3 startPos, int numRows, int numCols, float rowSpacing, float colSpacing, float radius) {
 	for (int x = 0; x < numCols; ++x) {
 		for (int z = 0; z < numRows; ++z) {
-			Vector3 position = Vector3(x * colSpacing, 10.0f, z * rowSpacing);
-			AddSphereToWorld(position, radius, 1.0f);
+			Vector3 position = startPos + Vector3(x * colSpacing, 10.0f, z * rowSpacing);
+			AddSphereToWorld(position, radius, 10.0f);
 		}
 	}
-	AddFloorToWorld(Vector3(0, -2, 0), Vector3(200, 2, 200), false);
 }
 
 void TutorialGame::InitMixedGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing) {
-	float sphereRadius = 1.0f;
-	Vector3 cubeDims = Vector3(1, 1, 1);
-
-	//AddCubeToWorld(Vector3(20.0f, 10.0f, 30.0f), cubeDims);
+	float sphereRadius = 2.0f;
+	Vector3 cubeDims = Vector3(2, 2, 2);
 
 	/**/
 	for (int x = 0; x < numCols; ++x) {
@@ -751,11 +697,13 @@ void TutorialGame::InitMixedGridWorld(int numRows, int numCols, float rowSpacing
 	}//*/
 }
 
-void TutorialGame::InitCubeGridWorld(int numRows, int numCols, float rowSpacing, float colSpacing, const Vector3& cubeDims) {
+void TutorialGame::InitCubeGridWorld(Vector3 startPos, int numRows, int numCols, int numLayers, float rowSpacing, float colSpacing, float laySpacing, const Vector3& cubeDims) {
 	for (int x = 1; x < numCols+1; ++x) {
-		for (int z = 1; z < numRows+1; ++z) {
-			Vector3 position = Vector3(x * colSpacing, 10.0f, z * rowSpacing);
-			AddCubeToWorld(position, cubeDims, 1.0f);
+		for (int y = 1; y < numLayers + 1; ++y) {
+			for (int z = 1; z < numRows + 1; ++z) {
+				Vector3 position = startPos + Vector3(x * colSpacing, y * laySpacing, z * rowSpacing);
+				AddCubeToWorld(position, cubeDims, 1.0f);
+			}
 		}
 	}
 }
@@ -800,7 +748,7 @@ bool TutorialGame::SelectObject() {
 		}
 	}
 	if (inSelectionMode) {
-		Debug::Print("Press Q to change to camera mode!", Vector2(5, 85));
+		//Debug::Print("Press Q to change to camera mode!", Vector2(5, 85));
 
 		if (Window::GetMouse()->ButtonDown(NCL::MouseButtons::Left)) {
 			if (selectionObject) {	//set colour to deselected;
@@ -833,7 +781,7 @@ bool TutorialGame::SelectObject() {
 		}
 	}
 	else {
-		Debug::Print("Press Q to change to select mode!", Vector2(5, 85));
+		//Debug::Print("Press Q to change to select mode!", Vector2(5, 85));
 	}
 	return false;
 }
@@ -846,7 +794,6 @@ line - after the third, they'll be able to twist under torque aswell.
 */
 
 void TutorialGame::MoveSelectedObject() {
-	Debug::Print("Click Force:" + std::to_string(forceMagnitude), Vector2(5, 90));
 	forceMagnitude += Window::GetMouse()->GetWheelMovement() * 100.0f;
 
 	if (!selectionObject) {

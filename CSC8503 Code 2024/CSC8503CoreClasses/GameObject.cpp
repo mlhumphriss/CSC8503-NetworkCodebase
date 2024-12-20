@@ -224,9 +224,9 @@ void EnemyObject::UpdateChaseMovement(float dt) {
 
 void EnemyObject::UpdatePathMovement(float dt) {
 	this->GetRenderObject()->SetColour(Vector4(1.0f, 0.5f, 0.0f, 1.0f));
+	if (pathNodes.size() <= 0) { routeDisrupted = true; return; }
+	
 	Vector3 nextNode = pathNodes[routePoint];
-
-
 	Vector3 tempPos = Vector3(this->GetTransform().GetPosition().x, 0, this->GetTransform().GetPosition().z);
 	Vector3 tempNext = Vector3(nextNode.x, 0, nextNode.z);
 	if (Vector::Length(tempPos - tempNext) < 3.5) {
