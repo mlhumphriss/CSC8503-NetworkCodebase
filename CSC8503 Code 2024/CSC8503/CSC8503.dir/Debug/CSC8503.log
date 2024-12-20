@@ -1,1 +1,120 @@
-﻿  CSC8503.vcxproj -> C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\x64\Debug\CSC8503.exe
+﻿  GameTechRenderer.cpp
+  Main.cpp
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\Main.cpp(186,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\Main.cpp(270,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  NetworkPlayer.cpp
+  NetworkedGame.cpp
+  StateGameObject.cpp
+  TutorialGame.cpp
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(559,75): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(559,75): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(559,75): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(559,75): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(559,75): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(559,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(559,60): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(559,60): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(559,60): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(559,60): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(560,80): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(560,80): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(560,80): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(560,80): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(560,80): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(560,65): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(560,65): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(560,65): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(560,65): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(560,65): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(568,29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(568,29): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(568,29): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(568,29): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(568,29): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(571,29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(571,29): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(571,29): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(571,29): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(571,29): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(576,29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(576,29): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(576,29): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(576,29): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(576,29): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(580,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(580,30): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(580,30): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(580,30): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(580,30): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(587,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(587,30): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(587,30): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(587,30): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(587,30): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(590,29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(590,29): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(590,29): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(590,29): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(590,29): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(593,36): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(593,36): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(593,36): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(593,36): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(593,36): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(596,36): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(596,36): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(596,36): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(596,36): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(596,36): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(601,36): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(601,36): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(601,36): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(601,36): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(601,36): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(604,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(604,30): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(604,30): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(604,30): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(604,30): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(607,29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(607,29): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(607,29): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(607,29): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(607,29): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(610,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(610,30): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(610,30): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(610,30): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(610,30): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(613,37): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(613,37): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(613,37): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(613,37): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(613,37): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(617,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(617,30): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(617,30): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(617,30): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(617,30): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(620,29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(620,29): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(620,29): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(620,29): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(620,29): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(623,29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(623,29): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(623,29): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(623,29): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(623,29): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(626,29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(626,29): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(626,29): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(626,29): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(626,29): warning C4244:         ]
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(629,29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(629,29): warning C4244:         with
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(629,29): warning C4244:         [
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(629,29): warning C4244:             T=float
+C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\CSC8503\TutorialGame.cpp(629,29): warning C4244:         ]
+  Generating Code...
+  CSC8503.vcxproj -> C:\Users\mlhum\source\repos\CSC8503-NetworkCodebase\CSC8503 Code 2024\x64\Debug\CSC8503.exe

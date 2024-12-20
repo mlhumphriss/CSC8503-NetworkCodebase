@@ -5,8 +5,8 @@
 #include "Camera.h"
 #include "Ray.h"
 #include "PhysicsObject.h"
-//#include "StateMachine.h"
-//#include "GameWorld.h"
+#include "NavigationGrid.h"
+#include "NavigationPath.h"
 
 using std::vector;
 
@@ -172,6 +172,11 @@ namespace NCL::CSC8503 {
 		int GetScore() {
 			return score;
 		}
+
+		bool GetChase() {
+			return canChase;
+		}
+
 		/*
 		typedef std::function<bool(Ray& r, RayCollision& closestCollision, bool closestObject, GameObject* ignore)> RaycastToWorld;
 		void SetRay(RaycastToWorld rayHit) { this->rayHit = rayHit; }
@@ -237,6 +242,11 @@ namespace NCL::CSC8503 {
 		void UpdatePathMovement(float dt);
 		void UpdateChaseMovement(float dt);
 
+		void CreatePath();
+		bool CheckNewPathNeeded();
+
+		void DisplayPathfinding();
+
 		virtual void OnCollisionBegin(GameObject* otherObject) override {
 			if (otherObject->GetTag() == 1) {
 				//reset maybe?
@@ -262,10 +272,14 @@ namespace NCL::CSC8503 {
 	protected:
 		Vector3 respawn;
 		Vector3 destination;
+
+		bool routeDisrupted;
+		int routePoint;
+
 		float speed;
 		PlayerObject* player;
 
-
+		vector<Vector3> pathNodes;
 		StateMachine* enemyStateMachine;
 	};
 }

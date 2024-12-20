@@ -8,6 +8,7 @@
 #include "StateTransition.h"
 #include "StateMachine.h"
 #include "State.h"
+#include "Debug.h"
 
 
 using namespace NCL::CSC8503;
@@ -105,11 +106,14 @@ bool PlayerObject::InMaze() {
 EnemyObject::EnemyObject() :GameObject() {
 	tag = 3;
 	speed = 2.0f;
+	routeDisrupted = true;
+	routePoint = 0;
 	enemyStateMachine = new StateMachine();
 
 	//state stuff add below
 	State* Idle = new State([&](float dt)-> void
 		{
+			routeDisrupted = true;
 			this->GetRenderObject()->SetColour(Vector4(1, 1, 0, 1));
 		}
 	);
@@ -125,13 +129,16 @@ EnemyObject::EnemyObject() :GameObject() {
 	);
 	State* Path = new State([&](float dt)-> void
 		{
-
+			this->CreatePath();
+			if (!routeDisrupted) { this->UpdatePathMovement(dt); }
 		}
 	);
 
 
 	enemyStateMachine->AddState(Idle);
 	enemyStateMachine->AddState(Respawn);
+	enemyStateMachine->AddState(Chase);
+	enemyStateMachine->AddState(Path);
 
 	enemyStateMachine->AddTransition(new StateTransition(Idle, Respawn, [&]()->bool
 		{
@@ -164,6 +171,17 @@ EnemyObject::EnemyObject() :GameObject() {
 			return false;
 		}
 	));
+	enemyStateMachine->AddTransition(new StateTransition(Path, Chase, [&]()->bool
+		{
+			RayCollision colCheck;
+			Ray c = Ray(this->GetTransform().GetPosition(), player->GetTransform().GetPosition() - this->GetTransform().GetPosition());
+			bool collides = rayHit(c, colCheck, true, this);
+			if (Vector::Length(player->GetTransform().GetPosition() - colCheck.collidedAt) < 10.0f) {
+				return true;
+			}
+			return false;
+		}
+	));
 	enemyStateMachine->AddTransition(new StateTransition(Chase, Idle, [&]()->bool
 		{
 			RayCollision colCheck;
@@ -173,6 +191,16 @@ EnemyObject::EnemyObject() :GameObject() {
 				return true;
 			}
 			return false;
+		}
+	));
+	enemyStateMachine->AddTransition(new StateTransition(Path, Idle, [&]()->bool
+		{
+			return !(player->GetChase());
+		}
+	));
+	enemyStateMachine->AddTransition(new StateTransition(Idle, Path, [&]()->bool
+		{
+			return (player->GetChase());
 		}
 	));
 
@@ -191,8 +219,54 @@ void EnemyObject::UpdateChaseMovement(float dt) {
 	
 	Vector3 movement = Vector3(direction.x, -1.0f, direction.z) * speed * dt;
 	this->GetPhysicsObject()->ApplyLinearImpulse(movement);
-	/*
-	Quaternion Orientation = Quaternion::Quaternion(direction, 0.0f);
-	Orientation.CalculateW();
-	this->GetTransform().SetOrientation(-Orientation);*/
+}
+
+void EnemyObject::UpdatePathMovement(float dt) {
+	this->GetRenderObject()->SetColour(Vector4(1.0f, 0.5f, 0.0f, 1.0f));
+	Vector3 nextNode = pathNodes[routePoint];
+	if (Vector::Length(this->GetTransform().GetPosition() - nextNode ) < 1.0f) {
+		if (routePoint != pathNodes.size()) {
+			routePoint++;
+			nextNode = pathNodes[routePoint];
+		}
+		else { routeDisrupted = true; }
+	}
+	Vector3 direction = nextNode - this->GetTransform().GetPosition();
+	Vector3 movement = Vector3(direction.x, -1.0f, direction.z) * speed * dt;
+	this->GetPhysicsObject()->ApplyLinearImpulse(movement);
+}
+
+void EnemyObject::CreatePath() {
+	if (CheckNewPathNeeded() == false) { return; }
+	NavigationGrid grid("TestGrid2.txt");
+	NavigationPath outPath;
+	
+	destination = player->GetTransform().GetPosition();
+	bool found = grid.FindPath(this->GetTransform().GetPosition(), destination, outPath);
+
+	if (!found) { routeDisrupted = true; return; }
+
+	routePoint = 0;
+	pathNodes.clear();
+	Vector3 pos;
+	while (outPath.PopWaypoint(pos)) {
+		pathNodes.push_back(pos);
+	}
+}
+
+bool EnemyObject::CheckNewPathNeeded() {
+	if (Vector::Length(player->GetTransform().GetPosition() - destination) > 30.0f || routeDisrupted==true) {
+		routeDisrupted = false;
+		return true;
+	}
+	return false;
+}
+
+void EnemyObject::DisplayPathfinding() {
+	for (int i = 1; i < pathNodes.size(); ++i) {
+		Vector3 a = pathNodes[i - 1];
+		Vector3 b = pathNodes[i];
+
+		Debug::DrawLine(a, b, Vector4(0, 1, 1, 1));
+	}
 }
