@@ -46,6 +46,7 @@ namespace NCL {
 
 			void InitDefaultFloor();
 			void InitMaze();
+			void InitMaze2();
 			void BridgeConstraintTest();
 			void AddKittenConstraints();
 

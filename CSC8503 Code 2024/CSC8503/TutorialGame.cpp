@@ -447,7 +447,7 @@ GameObject* TutorialGame::AddKittenToWorld(const Vector3& position) {
 }
 
 GameObject* TutorialGame::AddEnemyToWorld(const Vector3& position) {
-	float meshSize		= 3.0f;
+	float meshSize		= 2.0f;
 	float inverseMass	= 0.5f;
 
 	EnemyObject* character = new EnemyObject();
@@ -627,6 +627,86 @@ void TutorialGame::InitMaze() {
 	}
 	for (int i = 0; i < 3; i++) {
 		AddCubeToWorld(Vector3(55 + (i * 10), 6, 145), wallCubeSize, 0);
+	}
+}
+
+void TutorialGame::InitMaze2() {
+	Vector3 wallCubeSize = Vector3(2.5f, 7.0f, 2.5f);
+	float worldToLocalScale = 5.0f;
+	for (int i = 0; i < 32; i++) {
+		if (i != 20 || i != 21 ) {
+			for (int j = 0; j < 32; j++) {
+				if (i == 0  || i == 31) { AddCubeToWorld(Vector3(worldToLocalScale * i + 5, 6, worldToLocalScale * j + 5), wallCubeSize, 0); }
+				else if (j == 0 || j == 31) { AddCubeToWorld(Vector3(worldToLocalScale * i + 5, 6, worldToLocalScale * j + 5), wallCubeSize, 0); }
+			}
+
+		}
+	}
+	AddCubeToWorld(Vector3(35, 6, 15), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(45, 6, 15), wallCubeSize, 0);
+	for (int i = 0; i < 7; i++) {
+		AddCubeToWorld(Vector3(65 + (i * worldToLocalScale), 6, 25), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(25 + (i * worldToLocalScale), 6, 35), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(85, 6, 35), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(25, 6, 45), wallCubeSize, 0);
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(55 + (i * worldToLocalScale), 6, 45), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(85, 6, 45), wallCubeSize, 0);
+	for (int i = 0; i < 5; i++) {
+		AddCubeToWorld(Vector3(105 + (i * worldToLocalScale), 6, 45), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(25, 6, 55), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(45, 6, 55), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(95, 6, 65), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(115, 6, 65), wallCubeSize, 0);
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(135 + (i * worldToLocalScale), 6, 65), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(25 + (i * worldToLocalScale), 6, 75), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(65, 6, 75 + (i * worldToLocalScale)), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(85, 6, 75 + (i * worldToLocalScale)), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(95, 6, 75), wallCubeSize, 0);
+	AddCubeToWorld(Vector3(115, 6, 75), wallCubeSize, 0);
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(45, 6, 85 + (i * worldToLocalScale)), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(115 + (i * worldToLocalScale), 6, 85), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(15 + (i * worldToLocalScale), 6, 95), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(105 + (i * worldToLocalScale), 6, 95), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(25, 6, 105 + (i * worldToLocalScale)), wallCubeSize, 0);
+	}
+	AddCubeToWorld(Vector3(145, 6, 105), wallCubeSize, 0);
+	for (int i = 0; i < 4; i++) {
+		AddCubeToWorld(Vector3(115 + (i * worldToLocalScale), 6, 115), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 5; i++) {
+		AddCubeToWorld(Vector3(45 + (i * worldToLocalScale), 6, 125), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 2; i++) {
+		AddCubeToWorld(Vector3(25 + (i * worldToLocalScale), 6, 135), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 4; i++) {
+		AddCubeToWorld(Vector3(95 + (i * worldToLocalScale), 6, 135), wallCubeSize, 0);
+	}
+	for (int i = 0; i < 3; i++) {
+		AddCubeToWorld(Vector3(55 + (i * worldToLocalScale), 6, 145), wallCubeSize, 0);
 	}
 }
 

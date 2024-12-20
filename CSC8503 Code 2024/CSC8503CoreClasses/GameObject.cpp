@@ -99,7 +99,7 @@ void PlayerObject::UpdateMovement(float dt) {
 
 bool PlayerObject::InMaze() {
 	Vector3 currentPos = this->GetTransform().GetPosition();
-	if ((currentPos.x >= 0 && currentPos.x <= 150) && (currentPos.z >= 0 && currentPos.z <= 150) && (currentPos.y > -5)) { return true; }
+	if ((currentPos.x >= 0 && currentPos.x <= 160) && (currentPos.z >= 0 && currentPos.z <= 160) && (currentPos.y > -5)) { return true; }
 	return false;
 }
 
@@ -227,15 +227,15 @@ void EnemyObject::UpdatePathMovement(float dt) {
 	this->GetRenderObject()->SetColour(Vector4(1.0f, 0.5f, 0.0f, 1.0f));
 	Vector3 nextNode = pathNodes[routePoint];
 
-	std::cout << "D" << "\n";
-	if (Vector::Length(this->GetTransform().GetPosition() - nextNode ) < 2.0f) {
-		if (routePoint != pathNodes.size()) {
+
+	Vector3 tempPos = Vector3(this->GetTransform().GetPosition().x, 0, this->GetTransform().GetPosition().z);
+	Vector3 tempNext = Vector3(nextNode.x, 0, nextNode.z);
+	if (Vector::Length(tempPos - tempNext) < 3.5) {
+		if (routePoint < pathNodes.size()) {
 			routePoint++;
 			nextNode = pathNodes[routePoint];
-			std::cout << "E" << "\n";
 		}
-		else { routeDisrupted = true; std::cout << "E" << "\n";
-		}
+		else { routeDisrupted = true;}
 	}
 	Vector3 direction = nextNode - this->GetTransform().GetPosition();
 	Vector3 movement = Vector3(direction.x, -1.0f, direction.z) * speed * dt;
@@ -246,11 +246,10 @@ void EnemyObject::CreatePath() {
 	if (CheckNewPathNeeded() == false) { return; }
 	NavigationGrid grid("TestGrid2.txt");
 	NavigationPath outPath;
-	std::cout << "B" << "\n";
 	destination = player->GetTransform().GetPosition();
 	bool found = grid.FindPath(this->GetTransform().GetPosition(), destination, outPath);
 
-	if (!found) { routeDisrupted = true; std::cout << "C" << "\n"; return; }
+	if (!found) { routeDisrupted = true; return; }
 
 	routePoint = 0;
 	pathNodes.clear();
@@ -262,7 +261,6 @@ void EnemyObject::CreatePath() {
 
 bool EnemyObject::CheckNewPathNeeded() {
 	if (Vector::Length(player->GetTransform().GetPosition() - destination) > 30.0f || routeDisrupted==true) {
-		std::cout << "A" << "\n";
 		routeDisrupted = false;
 		return true;
 	}
