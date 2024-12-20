@@ -110,6 +110,10 @@ namespace NCL::CSC8503 {
 			tag = t;
 		}
 
+		typedef std::function<bool(Ray& r, RayCollision& closestCollision, bool closestObject, GameObject* ignore)> RaycastToWorld;
+		void SetRay(RaycastToWorld rayHit) { this->rayHit = rayHit; }
+		RaycastToWorld rayHit;
+
 	protected:
 		Transform			transform;
 
@@ -168,11 +172,11 @@ namespace NCL::CSC8503 {
 		int GetScore() {
 			return score;
 		}
-
+		/*
 		typedef std::function<bool(Ray& r, RayCollision& closestCollision, bool closestObject, GameObject* ignore)> RaycastToWorld;
 		void SetRay(RaycastToWorld rayHit) { this->rayHit = rayHit; }
 		RaycastToWorld rayHit;
-		
+		*/
 
 	protected:
 		Camera* playerCam;
@@ -230,8 +234,8 @@ namespace NCL::CSC8503 {
 		~EnemyObject();
 		void Update(float dt);
 
-		void UpdatePathMovement();
-		void UpdateChaseMovement();
+		void UpdatePathMovement(float dt);
+		void UpdateChaseMovement(float dt);
 
 		virtual void OnCollisionBegin(GameObject* otherObject) override {
 			if (otherObject->GetTag() == 1) {
@@ -258,7 +262,9 @@ namespace NCL::CSC8503 {
 	protected:
 		Vector3 respawn;
 		Vector3 destination;
+		float speed;
 		PlayerObject* player;
+
 
 		StateMachine* enemyStateMachine;
 	};

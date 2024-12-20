@@ -104,18 +104,31 @@ bool PlayerObject::InMaze() {
 
 EnemyObject::EnemyObject() :GameObject() {
 	tag = 3;
+	speed = 30.0f;
 	enemyStateMachine = new StateMachine();
 
 	//state stuff add below
 	State* Idle = new State([&](float dt)-> void
 		{
-		
-		});
+			this->GetRenderObject()->SetColour(Vector4(1, 1, 0, 1));
+		}
+	);
 	State* Respawn = new State([&](float dt)-> void
 		{
 			this->GetTransform().SetPosition(respawn);
 		}
 	);
+	State* Chase = new State([&](float dt)-> void
+		{
+			this->UpdateChaseMovement(dt);
+		}
+	);
+	State* Path = new State([&](float dt)-> void
+		{
+
+		}
+	);
+
 
 	enemyStateMachine->AddState(Idle);
 	enemyStateMachine->AddState(Respawn);
@@ -125,11 +138,44 @@ EnemyObject::EnemyObject() :GameObject() {
 			return this->GetTransform().GetPosition().y < -1.0f;
 		}
 	));
+	enemyStateMachine->AddTransition(new StateTransition(Chase, Respawn, [&]()->bool
+		{
+			return this->GetTransform().GetPosition().y < -1.0f;
+		}
+	));
+	enemyStateMachine->AddTransition(new StateTransition(Path, Respawn, [&]()->bool
+		{
+			return this->GetTransform().GetPosition().y < -1.0f;
+		}
+	));
 	enemyStateMachine->AddTransition(new StateTransition(Respawn, Idle, [&]()->bool
 		{
 			return this->GetTransform().GetPosition().y > -1.0f;
 		}
 	));
+	enemyStateMachine->AddTransition(new StateTransition(Idle, Chase, [&]()->bool
+		{
+			RayCollision colCheck;
+			Ray c = Ray(this->GetTransform().GetPosition(), player->GetTransform().GetPosition() - this->GetTransform().GetPosition());
+			bool collides = rayHit(c, colCheck, true, this);
+			if (Vector::Length(player->GetTransform().GetPosition() - colCheck.collidedAt) < 10.0f) {
+				return true;
+			}
+			return false;
+		}
+	));
+	enemyStateMachine->AddTransition(new StateTransition(Chase, Idle, [&]()->bool
+		{
+			RayCollision colCheck;
+			Ray c = Ray(this->GetTransform().GetPosition(), player->GetTransform().GetPosition() - this->GetTransform().GetPosition());
+			bool collides = rayHit(c, colCheck, true, this);
+			if (Vector::Length(player->GetTransform().GetPosition() - colCheck.collidedAt) > 10.0f) {
+				return true;
+			}
+			return false;
+		}
+	));
+
 
 }
 EnemyObject::~EnemyObject() {
@@ -137,4 +183,14 @@ EnemyObject::~EnemyObject() {
 }
 void EnemyObject::Update(float dt) {
 	enemyStateMachine->Update(dt);
+}
+
+void EnemyObject::UpdateChaseMovement(float dt) {
+	Vector3 direction = player->GetTransform().GetPosition() - this->GetTransform().GetPosition();
+	this->GetRenderObject()->SetColour(Vector4(1, 0, 0, 1));
+	
+	/*
+	Quaternion Orientation = Quaternion::Quaternion(direction, 0.0f);
+	Orientation.CalculateW();
+	this->GetTransform().SetOrientation(-Orientation);*/
 }

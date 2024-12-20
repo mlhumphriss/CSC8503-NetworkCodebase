@@ -470,6 +470,8 @@ GameObject* TutorialGame::AddEnemyToWorld(const Vector3& position) {
 	world->AddGameObject(character);
 	world->AddEnemyObject(character);
 
+	character->SetRay([&](Ray& r, RayCollision& closestCollision, bool closestObject, GameObject* ignore) -> bool { return world->Raycast(r, closestCollision, closestObject, ignore); });
+
 	return character;
 }
 
